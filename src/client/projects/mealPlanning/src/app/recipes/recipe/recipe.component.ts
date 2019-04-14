@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
-import { RecipesService } from 'src/client/app/services/recipes.service';
-import { Recipe } from '../../../../models/recipe.model'
-import { Subscription, Observable } from 'rxjs';
 import { ConfirmDialogComponent } from 'common';
+import { ParamMap, Router, ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
-
-
+import { Observable } from 'rxjs';
+import { Recipe } from '../../../../../../../models/recipe.model';
+import { RecipeService } from '../recipe.service';
 @Component({
-  selector: 'app-recipe',
+  selector: 'mp-recipe',
   templateUrl: './recipe.component.html',
   styleUrls: ['./recipe.component.css']
 })
 export class RecipeComponent implements OnInit {
+
   recipe: Recipe;
   recipe$: Observable<Recipe>;
   recipeId: string;
@@ -21,7 +20,7 @@ export class RecipeComponent implements OnInit {
   constructor(
     private _route: ActivatedRoute,
     private _router: Router,
-    private _recipeService: RecipesService,
+    private _recipeService: RecipeService,
     public dialog: MatDialog
   ) { }
 

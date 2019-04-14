@@ -6,30 +6,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { RecipeComponent } from './components/recipe/recipe.component';
-import { RecipeBookComponent } from './components/recipe-book/recipe-book.component';
 
 import { MatDividerModule, MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatDialogModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
-import { RecipeEditComponent } from './components/recipe-edit/recipe-edit.component';
-import { RecipeNewComponent } from './components/recipe-new/recipe-new.component';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
+import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
 const routes: Routes = [
-  { path: '', component: RecipeBookComponent },
-  { path: 'recipes', component: RecipeBookComponent },
-  { path: 'recipe/new', component: RecipeNewComponent },
-  { path: 'recipe/:id', component: RecipeComponent },
-  { path: 'recipe/:id/edit', component: RecipeEditComponent }
+  // { path: '', component: RecipeListComponent },
+  // { path: 'recipes', component: RecipeListComponent },
+  // { path: 'recipe/new', component: RecipeNewComponent },
+  // { path: 'recipe/:id', component: RecipeComponent },
+  // { path: 'recipe/:id/edit', component: RecipeEditComponent }
 ]
 
 @NgModule({
   declarations: [
-    AppComponent,
-    RecipeComponent,
-    RecipeBookComponent,
-    RecipeEditComponent,
-    RecipeNewComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +41,8 @@ const routes: Routes = [
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    CommonModule
+    CommonModule,
+    MealPlanningModule
   ],
   exports : [
     RouterModule

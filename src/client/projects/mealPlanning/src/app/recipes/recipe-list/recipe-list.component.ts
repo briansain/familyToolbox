@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { RecipesService } from 'src/client/app/services/recipes.service';
-import { Recipe } from '../../../../models/recipe.model';
+import { Recipe } from '../../../../../../../models/recipe.model';
 import { Router } from '@angular/router';
+import { RecipeService } from '../recipe.service';
 @Component({
-  selector: 'app-recipe-book',
-  templateUrl: './recipe-book.component.html',
-  styleUrls: ['./recipe-book.component.css']
+  selector: 'mp-recipe-list',
+  templateUrl: './recipe-list.component.html',
+  styleUrls: ['./recipe-list.component.css']
 })
-export class RecipeBookComponent implements OnInit {
+export class RecipeListComponent implements OnInit {
 
   constructor(
-    private _recipeService: RecipesService,
+    private _recipeService: RecipeService,
     private _router: Router  
   ) { }
   recipes: Recipe[];

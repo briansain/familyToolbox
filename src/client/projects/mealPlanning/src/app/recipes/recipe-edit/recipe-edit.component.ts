@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormArray } from '@angular/forms';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { RecipesService } from 'src/client/app/services/recipes.service';
+import { ParamMap, Router, ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { RecipeService } from '../recipe.service';
+import { FormBuilder, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-recipe-edit',
+  selector: 'mp-recipe-edit',
   templateUrl: './recipe-edit.component.html',
   styleUrls: ['./recipe-edit.component.css']
 })
 export class RecipeEditComponent implements OnInit {
+
   recipe$: any;
   recipeId: string;
   recipeForm = this._formBuilder.group( {
@@ -43,7 +44,7 @@ export class RecipeEditComponent implements OnInit {
     private _route: ActivatedRoute,
     private _router: Router,
     private _formBuilder: FormBuilder,
-    private _recipeService: RecipesService) { }
+    private _recipeService: RecipeService) { }
 
   ngOnInit() {
     this.recipe$ = this._route.paramMap.pipe(

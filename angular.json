@@ -172,6 +172,134 @@
           }
         }
       }
+    },
+    "mealPlanning": {
+      "root": "src/client/projects/mealPlanning/",
+      "sourceRoot": "src/client/projects/mealPlanning/src",
+      "projectType": "application",
+      "prefix": "mp",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "deleteOutputPath": false,
+            "outputPath": "dist/mealPlanning",
+            "index": "src/client/projects/mealPlanning/src/index.html",
+            "main": "src/client/projects/mealPlanning/src/main.ts",
+            "polyfills": "src/client/projects/mealPlanning/src/polyfills.ts",
+            "tsConfig": "src/client/projects/mealPlanning/tsconfig.app.json",
+            "assets": [
+              "src/client/projects/mealPlanning/src/favicon.ico",
+              "src/client/projects/mealPlanning/src/assets"
+            ],
+            "styles": [
+              "src/client/projects/mealPlanning/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/client/projects/mealPlanning/src/environments/environment.ts",
+                  "with": "src/client/projects/mealPlanning/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "mealPlanning:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "mealPlanning:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "mealPlanning:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/client/projects/mealPlanning/src/test.ts",
+            "polyfills": "src/client/projects/mealPlanning/src/polyfills.ts",
+            "tsConfig": "src/client/projects/mealPlanning/tsconfig.spec.json",
+            "karmaConfig": "src/client/projects/mealPlanning/karma.conf.js",
+            "styles": [
+              "src/client/projects/mealPlanning/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/client/projects/mealPlanning/src/favicon.ico",
+              "src/client/projects/mealPlanning/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/client/projects/mealPlanning/tsconfig.app.json",
+              "src/client/projects/mealPlanning/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "mealPlanning-e2e": {
+      "root": "src/client/projects/mealPlanning-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "src/client/projects/mealPlanning-e2e/protractor.conf.js",
+            "devServerTarget": "mealPlanning:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "mealPlanning:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "src/client/projects/mealPlanning-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "FamilyToolbox"

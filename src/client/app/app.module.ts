@@ -13,9 +13,8 @@ import { MatDividerModule, MatCardModule, MatFormFieldModule, MatInputModule,
   MatButtonModule, MatDialogModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { RecipeEditComponent } from './components/recipe-edit/recipe-edit.component';
 import { RecipeNewComponent } from './components/recipe-new/recipe-new.component';
-import { ConfirmDialogComponent } from './components/confirm-dialog/confirm-dialog.component';
 import { LayoutModule } from '@angular/cdk/layout';
-
+import { CommonModule } from 'common';
 const routes: Routes = [
   { path: '', component: RecipeBookComponent },
   { path: 'recipes', component: RecipeBookComponent },
@@ -31,7 +30,6 @@ const routes: Routes = [
     RecipeBookComponent,
     RecipeEditComponent,
     RecipeNewComponent,
-    ConfirmDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -49,13 +47,11 @@ const routes: Routes = [
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
-    MatListModule
+    MatListModule,
+    CommonModule
   ],
   exports : [
     RouterModule
-  ],
-  entryComponents: [
-    ConfirmDialogComponent
   ],
   providers: [ HttpClient ],
   bootstrap: [ AppComponent ]

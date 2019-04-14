@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipesService } from 'src/client/app/services/recipes.service';
-import { Recipe } from '../../../../models/recipe';
+import { Recipe } from '../../../../models/recipe.model';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-recipe-book',

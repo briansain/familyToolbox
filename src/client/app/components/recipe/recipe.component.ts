@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { RecipesService } from 'src/client/app/services/recipes.service';
-import { Recipe } from '../../../../models/recipe'
+import { Recipe } from '../../../../models/recipe.model'
 import { Subscription, Observable } from 'rxjs';
-import { ConfirmDialogComponent } from '../confirm-dialog/confirm-dialog.component';
+import { ConfirmDialogComponent } from 'common';
 import { MatDialog } from '@angular/material';
 
 

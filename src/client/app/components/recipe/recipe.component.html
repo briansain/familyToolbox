@@ -1,0 +1,22 @@
+<div *ngIf="recipe">
+    <a mat-raised-button [routerLink]="['/recipe', recipe._id, 'edit']">Edit Recipe</a>
+    <a mat-raised-button (click)="deleteRecipe()">Delete Recipe</a>
+    <mat-card class="recipe">
+        <mat-card-header>
+            <mat-card-title>{{recipe.title}}</mat-card-title>
+            <mat-card-subtitle *ngIf="recipe.recipeDescription">{{recipe.recipeDescription}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <div class="ingredients">
+                <ul>
+                    <li *ngFor="let ingredient of recipe.ingredients">{{ingredient}}</li>
+                </ul>
+            </div>
+            <div class="directions">
+                <ol>
+                    <li *ngFor="let direction of recipe.directions">{{direction}}</li>
+                </ol>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</div>

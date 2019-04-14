@@ -1,0 +1,12 @@
+for tags
+    add ability to add tags, maybe a tag manager to start out with
+    add tags to recipes
+    search for recipes based on tags
+
+add more material to the site, including the material nav
+add meal planning
+
+
+
+Budget
+    manage recipes

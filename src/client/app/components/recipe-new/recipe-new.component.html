@@ -1,0 +1,36 @@
+<mat-card class="recipe">
+  <mat-card-header>
+    <mat-card-title>Add Recipe</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form [formGroup]="recipeForm" (ngSubmit)="saveRecipe()">
+      <div>
+        <mat-form-field class="fullForm">
+          <input matInput placeholder="Title" formControlName="title" />
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field class="fullForm">
+          <input matInput placeholder="Description" formControlName="description" />
+        </mat-form-field>
+      </div>
+      <div formArrayName="ingredients" class="ingredients">
+        <h3>Ingredients</h3><a mat-raised-button (click)="addIngredient()">Add Ingredient</a>
+        <div *ngFor="let ingredient of ingredients.controls; let i=index">
+          <mat-form-field>
+            <textarea matInput placeholder="" [formControlName]="i"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <div formArrayName="directions" class="directions">
+        <h3>Directions</h3><a mat-raised-button (click)="addDirection()">Add Direction</a>
+        <div *ngFor="let direction of directions.controls; let d=index">
+          <mat-form-field>
+            <textarea matInput placeholder="" [formControlName]="d"></textarea>
+          </mat-form-field>
+        </div>
+      </div>
+      <button mat-raised-button type="submit">Save Recipe</button>
+    </form>
+  </mat-card-content>
+</mat-card>

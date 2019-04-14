@@ -1,0 +1,13 @@
+<a mat-raised-button (click)="addRecipe()">Add a Recipe</a>
+<div *ngIf="recipes">
+  <div *ngFor="let recipe of recipes" class="recipe">
+    <mat-card (click)="navigateToRecipe(recipe)">
+      <mat-card-header>
+        <mat-card-title><a [routerLink]="['/recipe', recipe._id]">{{recipe.title}}</a></mat-card-title>
+      </mat-card-header>
+      <mat-card-content *ngIf="recipe.recipeDescription">
+        {{recipe.recipeDescription}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

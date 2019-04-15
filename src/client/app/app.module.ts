@@ -7,8 +7,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { MatDividerModule, MatCardModule, MatFormFieldModule, MatInputModule,
-  MatButtonModule, MatDialogModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
+import { MatDividerModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule } from '@angular/material';
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
@@ -29,11 +28,6 @@ const routes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     MatDividerModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatDialogModule,
     RouterModule.forRoot(routes),
     ReactiveFormsModule,
     LayoutModule,

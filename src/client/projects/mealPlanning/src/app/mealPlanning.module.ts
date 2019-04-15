@@ -7,7 +7,7 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeNewComponent } from './recipes/recipe-new/recipe-new.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatCardModule, MatFormFieldModule } from '@angular/material';
+import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   { path: '', component: RecipeListComponent },
@@ -29,6 +29,8 @@ const routes: Routes = [
     BrowserModule,
     MatCardModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],

@@ -300,6 +300,133 @@
           }
         }
       }
+    },
+    "budget": {
+      "root": "src/client/projects/budget/",
+      "sourceRoot": "src/client/projects/budget/src",
+      "projectType": "application",
+      "prefix": "ft-budget",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/budget",
+            "index": "src/client/projects/budget/src/index.html",
+            "main": "src/client/projects/budget/src/main.ts",
+            "polyfills": "src/client/projects/budget/src/polyfills.ts",
+            "tsConfig": "src/client/projects/budget/tsconfig.app.json",
+            "assets": [
+              "src/client/projects/budget/src/favicon.ico",
+              "src/client/projects/budget/src/assets"
+            ],
+            "styles": [
+              "src/client/projects/budget/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/client/projects/budget/src/environments/environment.ts",
+                  "with": "src/client/projects/budget/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "budget:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "budget:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "budget:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/client/projects/budget/src/test.ts",
+            "polyfills": "src/client/projects/budget/src/polyfills.ts",
+            "tsConfig": "src/client/projects/budget/tsconfig.spec.json",
+            "karmaConfig": "src/client/projects/budget/karma.conf.js",
+            "styles": [
+              "src/client/projects/budget/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "src/client/projects/budget/src/favicon.ico",
+              "src/client/projects/budget/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "src/client/projects/budget/tsconfig.app.json",
+              "src/client/projects/budget/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "budget-e2e": {
+      "root": "src/client/projects/budget-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "src/client/projects/budget-e2e/protractor.conf.js",
+            "devServerTarget": "budget:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "budget:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "src/client/projects/budget-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "FamilyToolbox"

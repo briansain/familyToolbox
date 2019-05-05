@@ -305,12 +305,13 @@
       "root": "src/client/projects/budget/",
       "sourceRoot": "src/client/projects/budget/src",
       "projectType": "application",
-      "prefix": "ft-budget",
+      "prefix": "ft",
       "schematics": {},
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "deleteOutputPath": false,
             "outputPath": "dist/budget",
             "index": "src/client/projects/budget/src/index.html",
             "main": "src/client/projects/budget/src/main.ts",

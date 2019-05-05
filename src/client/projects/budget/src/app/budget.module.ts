@@ -1,9 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { BudgetRoutingModule } from './budget-routing.module';
 import { AppComponent } from './app.component';
 import { BudgetAllComponent } from './budget-all/budget-all.component';
+import { Routes, RouterModule } from '@angular/router';
+const routes: Routes = [
+  { path: '', component: BudgetAllComponent },
+  { path: 'budget', component: BudgetAllComponent }
+]
 
 @NgModule({
   declarations: [
@@ -12,10 +16,9 @@ import { BudgetAllComponent } from './budget-all/budget-all.component';
   ],
   imports: [
     BrowserModule,
-    BudgetRoutingModule
+    RouterModule.forChild(routes)
   ],
-  providers: [],
-  bootstrap: [AppComponent],
-  exports: [BudgetAllComponent]
+  providers: []// ,
+  // bootstrap: [AppComponent]
 })
 export class BudgetModule { }

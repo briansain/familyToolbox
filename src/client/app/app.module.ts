@@ -11,6 +11,7 @@ import { MatDividerModule, MatToolbarModule, MatSidenavModule, MatIconModule, Ma
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
+import { BudgetModule } from '../projects/budget/src/app/budget.module';
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },
   // { path: 'recipes', component: RecipeListComponent },
@@ -36,7 +37,8 @@ const routes: Routes = [
     MatIconModule,
     MatListModule,
     CommonModule,
-    MealPlanningModule
+    MealPlanningModule,
+    BudgetModule
   ],
   exports : [
     RouterModule

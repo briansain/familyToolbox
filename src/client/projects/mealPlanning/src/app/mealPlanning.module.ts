@@ -10,7 +10,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
 import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
-  { path: '', component: RecipeListComponent },
+  // { path: '', component: RecipeListComponent },
   { path: 'recipes', component: RecipeListComponent },
   { path: 'recipe/new', component: RecipeNewComponent },
   { path: 'recipe/:id', component: RecipeComponent },

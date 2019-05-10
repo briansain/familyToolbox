@@ -1,4 +1,4 @@
-.itemHeader {
+.itemHeader, .amount {
   color: #cc0000;
 }
 
@@ -6,9 +6,8 @@
   text-decoration: none;
 }
 
-.amount {
+.amount, .totalAmount, .itemHeader {
   font-weight: 500;
-  color: #cc0000;
 }
 
 th {
@@ -31,4 +30,22 @@ table {
 
 tfoot > tr > td {
   color: black;
+}
+
+.icon {
+  color: black;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.iconButton {
+  line-height: 1;
+  height: initial;
+  width: initial;
+}
+
+.itemHeader span {
+  vertical-align: middle;
+  padding: 5px 0px 5px 5px;
+  text-align: left;
 }

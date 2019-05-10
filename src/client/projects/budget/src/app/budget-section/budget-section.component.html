@@ -12,11 +12,18 @@
         <tr *ngFor="let item of budgetSection.budgetItems;">
             <td class="itemHeader">
                 <span>{{ item.itemHeader }}</span>
-                <button mat-icon-button class="iconButton">
+                <button mat-icon-button class="iconButton" (click)="showItemEditor(item)">
                     <mat-icon class="icon">edit</mat-icon>
                 </button>
             </td>
-            <td *ngFor="let budgetAmount of item.budgetAmounts" [ngClass]="{'amount': budgetAmount.amount}">{{ budgetAmount.amount | currency}} </td>
+            <td *ngFor="let budgetAmount of item.budgetAmounts; index as budgetIndex" [ngClass]="{'amount': budgetAmount.amount}">
+                <span *ngIf="item.id !== editorItem.id; else editBlock">{{ budgetAmount.amount | currency}}</span>
+                <ng-template #editBlock>
+                    <mat-form-field>
+                        <input matInput type="number" placeHolder="" class="budgetItem" [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}" [(value)]="editorItem.budgetAmounts[budgetIndex].amount" />
+                    </mat-form-field>
+                </ng-template>
+            </td>
             <td class="totalAmount">{{ getItemSum(item.budgetAmounts) | currency }}</td>
         </tr>
     </tbody>
@@ -24,7 +31,9 @@
         <tr>
             <td class="totalHeader">Total</td>
             <td *ngFor="let paycheck of paychecks; index as i;" class="amount">{{ getPaycheckTotal(i) | currency }}</td>
-            <td class="totalAmount">{{ getAllPaycheckTotal() | currency }}</td>
+            <td class="totalAmount">
+                <span>{{ getAllPaycheckTotal() | currency }}</span>
+            </td>
         </tr>
     </tfoot>
 </table>

@@ -9,6 +9,7 @@ export class BudgetSectionComponent implements OnInit {
   budgetSection: any = {
     sectionHeader: "Utilities",
     budgetItems: [{
+      id: '1234',
       itemHeader: "Gas",
       budgetAmounts: [{
         amount: 80
@@ -16,6 +17,7 @@ export class BudgetSectionComponent implements OnInit {
         amount: 0
       }]
     },{
+      id: '5678',
       itemHeader: "Phone",
       budgetAmounts: [{
         amount: 0
@@ -27,12 +29,14 @@ export class BudgetSectionComponent implements OnInit {
 
   paycheckCount = 2;
   paychecks: Array<number>;
+  editorItem: any;
 
   constructor() { 
-    this.paychecks = new Array(this.paycheckCount).fill(1);
   }
 
   ngOnInit() {
+    this.paychecks = new Array(this.paycheckCount).fill(1);
+    this.editorItem = {};
   }
 
   getPaycheckDescription(index: number): string {
@@ -69,5 +73,13 @@ export class BudgetSectionComponent implements OnInit {
     })
 
     return total;
+  }
+
+  showItemEditor(item: any): void {
+    if (!this.editorItem.id) {    
+      this.editorItem = item;
+    } else {
+      // toast editor is already open
+    }
   }
 }

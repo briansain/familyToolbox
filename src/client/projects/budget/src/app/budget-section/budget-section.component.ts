@@ -6,37 +6,46 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./budget-section.component.css']
 })
 export class BudgetSectionComponent implements OnInit {
-  budgetSection: any = {
+  budgetSection: BudgetSection = {
+    id: "abc-123",
     sectionHeader: "Utilities",
     budgetItems: [{
       id: '1234',
       itemHeader: "Gas",
       budgetAmounts: [{
-        amount: 80
+        amount: 80,
+        isPaid: false,
+        isCash: false
       }, {
-        amount: 0
+        amount: 0,
+        isPaid: false,
+        isCash: false
       }]
     },{
       id: '5678',
       itemHeader: "Phone",
       budgetAmounts: [{
-        amount: 0
+        amount: 0,
+        isPaid: false,
+        isCash: false
       }, {
-        amount: 60
+        amount: 60,
+        isPaid: false,
+        isCash: false
       }]
     }]
   };
 
   paycheckCount = 2;
   paychecks: Array<number>;
-  editorItem: any;
+  editorItem: BudgetItem;
 
   constructor() { 
   }
 
   ngOnInit() {
     this.paychecks = new Array(this.paycheckCount).fill(1);
-    this.editorItem = {};
+    this.editorItem = new BudgetItem();
   }
 
   getPaycheckDescription(index: number): string {
@@ -77,9 +86,42 @@ export class BudgetSectionComponent implements OnInit {
 
   showItemEditor(item: any): void {
     if (!this.editorItem.id) {    
-      this.editorItem = item;
+      this.editorItem = JSON.parse(JSON.stringify(item));
+      // this.editorItem = item;
     } else {
       // toast editor is already open
     }
   }
+
+  cancel() {
+    this.editorItem = new BudgetItem();
+  }
+
+  saveEditor(index: number): void {
+    this.budgetSection.budgetItems[index] = this.copy(this.editorItem);
+    this.editorItem = new BudgetItem();
+  }
+
+  private copy<T>(source: T): T {
+    return JSON.parse(JSON.stringify(source));
+  }
+}
+
+export class BudgetSection {
+  id = "";
+  sectionHeader = "";
+  budgetItems = Array<BudgetItem>();
+
+}
+
+export class BudgetItem {
+  id = "";
+  itemHeader = "";
+  budgetAmounts = Array<BudgetAmount>();
+}
+
+export class BudgetAmount {
+  amount = 0;
+  isPaid = false;
+  isCash = false;
 }

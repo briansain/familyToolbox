@@ -9,22 +9,44 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let item of budgetSection.budgetItems;">
-            <td class="itemHeader">
+        <tr *ngFor="let item of budgetSection.budgetItems; index as budgetItemIndex">
+            <td *ngIf="item.id !== editorItem.id; else editorHeaderBlock" class="itemHeader">
                 <span>{{ item.itemHeader }}</span>
                 <button mat-icon-button class="iconButton" (click)="showItemEditor(item)">
                     <mat-icon class="icon">edit</mat-icon>
                 </button>
             </td>
+            <ng-template #editorHeaderBlock>
+                <td class="itemHeader">
+                    <mat-form-field>
+                        <input matInput type="text" placeholder="" [(ngModel)]="item.itemHeader" />
+                    </mat-form-field>
+                </td>
+            </ng-template>
             <td *ngFor="let budgetAmount of item.budgetAmounts; index as budgetIndex" [ngClass]="{'amount': budgetAmount.amount}">
                 <span *ngIf="item.id !== editorItem.id; else editBlock">{{ budgetAmount.amount | currency}}</span>
                 <ng-template #editBlock>
                     <mat-form-field>
-                        <input matInput type="number" placeHolder="" class="budgetItem" [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}" [(value)]="editorItem.budgetAmounts[budgetIndex].amount" />
+                        <input matInput type="number" placeHolder="" class="budgetItem budgetAmountInput" [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].amount" />
                     </mat-form-field>
+                    <br />
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isPaid">Is Paid?</mat-checkbox>
+                    <br />
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isCash">Is Cash?</mat-checkbox>
                 </ng-template>
             </td>
-            <td class="totalAmount">{{ getItemSum(item.budgetAmounts) | currency }}</td>
+            <td class="totalAmount" *ngIf="item.id !== editorItem.id; else editTotalBlock">
+                <span>{{ getItemSum(item.budgetAmounts) | currency }}</span>
+            </td>
+            <ng-template #editTotalBlock>
+                <td>
+                    <!-- <span>{{ getItemSum(editorItem.budgetAmounts) | currency }}</span> -->
+                    <!-- <br /> -->
+                    <button mat-raised-button *ngIf="item.id === editorItem.id" class="saveButton" (click)="saveEditor(budgetItemIndex)">Save</button>
+                    <br />
+                    <button mat-flat-button *ngIf="item.id === editorItem.id" class="cancelButton" (click)="cancel()">Cancel</button>
+                </td>
+            </ng-template>
         </tr>
     </tbody>
     <tfoot>

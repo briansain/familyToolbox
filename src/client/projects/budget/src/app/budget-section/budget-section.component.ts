@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'ft-budget-section',
@@ -6,35 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./budget-section.component.css']
 })
 export class BudgetSectionComponent implements OnInit {
-  budgetSection: BudgetSection = {
-    id: "abc-123",
-    sectionHeader: "Utilities",
-    budgetItems: [{
-      id: '1234',
-      itemHeader: "Gas",
-      budgetAmounts: [{
-        amount: 80,
-        isPaid: false,
-        isCash: false
-      }, {
-        amount: 0,
-        isPaid: false,
-        isCash: false
-      }]
-    },{
-      id: '5678',
-      itemHeader: "Phone",
-      budgetAmounts: [{
-        amount: 0,
-        isPaid: false,
-        isCash: false
-      }, {
-        amount: 60,
-        isPaid: false,
-        isCash: false
-      }]
-    }]
-  };
+  @Input() budgetSection: BudgetSection;
 
   paycheckCount = 2;
   paychecks: Array<number>;

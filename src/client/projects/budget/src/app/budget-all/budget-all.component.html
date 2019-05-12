@@ -1,2 +1,38 @@
-<h1>Budget All~~</h1>
+<h2>Budget - May 2019</h2>
+<div *ngFor="let paycheck of paychecks">
+  <div *ngIf="!editPaycheck">
+      ({{paycheck.startDate | date:dateFormat}} - {{paycheck.endDate | date:dateFormat}}) {{paycheck.source}} - {{paycheck.amount | currency}} 
+      <button mat-icon-button class="iconButton">
+        <mat-icon class="icon">edit</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="editPaycheck">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Source" [value]="paycheck.source" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="number" placeholder="Amount" [value]="paycheck.amount" />
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="startDatePicker" placeholder="Start Date" [value]="paycheck.startDate">
+      <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #startDatePicker></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput [matDatepicker]="endDatePicker" placeholder="End Date" [value]="paycheck.endDate">
+      <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+      <mat-datepicker #endDatePicker></mat-datepicker>
+    </mat-form-field>
+  </div>
+</div>
+<br />
+
+<div *ngIf="editPaycheck">
+  
+</div>
+<br />
+
+
+
+
 <ft-budget-section [budgetSection]="budgetSection"></ft-budget-section>

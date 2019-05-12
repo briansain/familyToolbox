@@ -1,0 +1,11 @@
+.icon {
+  color: black;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.iconButton {
+  line-height: 1;
+  height: initial;
+  width: initial;
+}

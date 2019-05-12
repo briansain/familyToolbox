@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { BudgetAllComponent } from './budget-all/budget-all.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BudgetSectionComponent } from './budget-section/budget-section.component';
-import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 const routes: Routes = [
@@ -26,6 +26,8 @@ const routes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatCheckboxModule,
+    MatDatepickerModule,
+    MatNativeDateModule, // TODO: change to a better supported provider
     FormsModule,
     RouterModule.forChild(routes)
   ],

@@ -33,6 +33,8 @@
                     <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isPaid">Is Paid?</mat-checkbox>
                     <br />
                     <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isCash">Is Cash?</mat-checkbox>
+                    <br />
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isAutoPay">Is AutoPay?</mat-checkbox>
                 </ng-template>
             </td>
             <td class="totalAmount" *ngIf="item.id !== editorItem.id; else editTotalBlock">

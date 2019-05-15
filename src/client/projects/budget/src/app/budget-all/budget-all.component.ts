@@ -17,11 +17,13 @@ export class BudgetAllComponent implements OnInit {
       budgetAmounts: [{
         amount: 80,
         isPaid: false,
-        isCash: false
+        isCash: false,
+        isAutoPay: false
       }, {
         amount: 0,
         isPaid: false,
-        isCash: false
+        isCash: false,
+        isAutoPay: false
       }]
     },{
       id: '5678',
@@ -29,11 +31,13 @@ export class BudgetAllComponent implements OnInit {
       budgetAmounts: [{
         amount: 0,
         isPaid: false,
-        isCash: false
+        isCash: false,
+        isAutoPay: false
       }, {
         amount: 60,
         isPaid: false,
-        isCash: false
+        isCash: false,
+        isAutoPay: false
       }]
     }]
   };

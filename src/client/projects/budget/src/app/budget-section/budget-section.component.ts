@@ -96,4 +96,5 @@ export class BudgetAmount {
   amount = 0;
   isPaid = false;
   isCash = false;
+  isAutoPay = false;
 }

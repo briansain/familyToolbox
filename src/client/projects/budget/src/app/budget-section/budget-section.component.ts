@@ -59,7 +59,7 @@ export class BudgetSectionComponent implements OnInit {
 
   showItemEditor(item: any): void {
     if (!this.editorItem.id) {    
-      this.editorItem = JSON.parse(JSON.stringify(item));
+      this.editorItem = this._deepCopy.copy(item);
       // this.editorItem = item;
     } else {
       // toast editor is already open

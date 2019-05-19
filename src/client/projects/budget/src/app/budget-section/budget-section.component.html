@@ -46,8 +46,6 @@
             </td>
             <ng-template #editTotalBlock>
                 <td>
-                    <!-- <span>{{ getItemSum(editorItem.budgetAmounts) | currency }}</span> -->
-                    <!-- <br /> -->
                     <button mat-raised-button *ngIf="item.id === editorItem.id" class="saveButton" (click)="saveEditor(budgetItemIndex)">Save</button>
                     <br />
                     <button mat-flat-button *ngIf="item.id === editorItem.id" class="cancelButton" (click)="cancel()">Cancel</button>

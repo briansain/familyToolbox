@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BudgetSection } from '../budget-section/budget-section.component';
+import { DeepCopyService } from 'common';
 
 @Component({
   selector: 'ft-budget-all',
@@ -44,14 +45,16 @@ export class BudgetAllComponent implements OnInit {
     }]
   };
 
-  editPaycheck = new Paycheck;
+  editPaycheck: Paycheck;
 
   paychecks: Paycheck[] = [{
+    id: "123abc",
     source: "Job 1",
     amount: 1800,
     startDate: new Date(2019, 5, 1),
     endDate: new Date(2019, 5, 14)
   },{
+    id: "456def",
     source: "Job 2",
     amount: 1800,
     startDate: new Date(2019, 5, 15),
@@ -59,14 +62,28 @@ export class BudgetAllComponent implements OnInit {
   }];
 
   dateFormat = 'MM/dd';
-  constructor() { }
+  constructor(private _deepClone: DeepCopyService) { }
 
   ngOnInit() {
+    this.editPaycheck = new Paycheck();
   }
 
+  clickEditPaycheck(paycheck: Paycheck): void {
+    this.editPaycheck = this._deepClone.copy(paycheck);
+  }
+
+  clickSavePaycheck(index: number): void {
+    this.paychecks[index] = this._deepClone.copy(this.editPaycheck);
+    this.editPaycheck = new Paycheck();
+  }
+
+  clickCancelPaycheck(): void {
+    this.editPaycheck = new Paycheck();
+  }
 }
 
 export class Paycheck {
+  id = "";
   source = "";
   amount = 0;
   startDate = new Date();

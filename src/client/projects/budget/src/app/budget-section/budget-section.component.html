@@ -23,7 +23,7 @@
                     </mat-form-field>
                     <br />
                     <mat-form-field>
-                        <textarea matInput placeholder="Notes" class="notes">{{editorItem.notes}}</textarea>
+                        <textarea matInput placeholder="Notes" class="notes" [(ngModel)]="editorItem.notes"></textarea>
                     </mat-form-field>
                 </td>
             </ng-template>

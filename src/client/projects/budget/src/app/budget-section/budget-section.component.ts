@@ -97,3 +97,4 @@ export class BudgetAmount {
   isCash = false;
   isAutoPay = false;
 }
+

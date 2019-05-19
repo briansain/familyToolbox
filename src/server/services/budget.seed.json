@@ -1,0 +1,61 @@
+{
+  "title": "Budget For May 2019",
+  "paychecks": [
+    {
+      "source": "Job 1",
+      "amount": 1800,
+      "startDate": "2019-05-01T00:00:00.000",
+      "endDate": "2019-05-14T00:00:00.000"
+    },
+    {
+      "source": "Job 2",
+      "amount": 1800,
+      "startDate": "2019-05-15T00:00:00.000",
+      "endDate": "2019-05-31T00:00:00.000"
+    }
+  ],
+  "month": "2019-05-01T00:00:00.000Z",
+  "sections": [
+    {
+      "sectionHeader": "Utilities",
+      "budgetItems": [
+        {
+          "itemHeader": "Gas",
+          "notes": "I have gas",
+          "budgetAmounts": [
+            {
+              "amount": 80,
+              "isPaid": false,
+              "isCash": false,
+              "isAutoPay": false
+            },
+            {
+              "amount": 0,
+              "isPaid": false,
+              "isCash": false,
+              "isAutoPay": false
+            }
+          ]
+        },
+        {
+          "itemHeader": "Phone",
+          "notes": "Can you hear me now?",
+          "budgetAmounts": [
+            {
+              "amount": 0,
+              "isPaid": false,
+              "isCash": false,
+              "isAutoPay": false
+            },
+            {
+              "amount": 60,
+              "isPaid": false,
+              "isCash": false,
+              "isAutoPay": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

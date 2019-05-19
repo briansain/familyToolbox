@@ -1,9 +1,9 @@
 <h2>Budget - May 2019</h2>
 <div *ngFor="let paycheck of paychecks">
   <div *ngIf="!editPaycheck">
-      ({{paycheck.startDate | date:dateFormat}} - {{paycheck.endDate | date:dateFormat}}) {{paycheck.source}} - {{paycheck.amount | currency}} 
-      <button mat-icon-button class="iconButton">
-        <mat-icon class="icon">edit</mat-icon>
+    ({{paycheck.startDate | date:dateFormat}} - {{paycheck.endDate | date:dateFormat}}) {{paycheck.source}} - {{paycheck.amount | currency}} 
+    <button mat-icon-button class="iconButton">
+      <mat-icon class="icon">edit</mat-icon>
     </button>
   </div>
   <div *ngIf="editPaycheck">
@@ -25,14 +25,7 @@
     </mat-form-field>
   </div>
 </div>
+
 <br />
-
-<div *ngIf="editPaycheck">
-  
-</div>
-<br />
-
-
-
 
 <ft-budget-section [budgetSection]="budgetSection"></ft-budget-section>

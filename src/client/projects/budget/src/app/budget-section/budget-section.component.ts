@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { DeepCopyService } from 'common';
 
 @Component({
   selector: 'ft-budget-section',
@@ -12,7 +13,7 @@ export class BudgetSectionComponent implements OnInit {
   paychecks: Array<number>;
   editorItem: BudgetItem;
 
-  constructor() { 
+  constructor(private _deepCopy: DeepCopyService) { 
   }
 
   ngOnInit() {
@@ -70,13 +71,10 @@ export class BudgetSectionComponent implements OnInit {
   }
 
   saveEditor(index: number): void {
-    this.budgetSection.budgetItems[index] = this.copy(this.editorItem);
+    this.budgetSection.budgetItems[index] = this._deepCopy.copy(this.editorItem);
     this.editorItem = new BudgetItem();
   }
 
-  private copy<T>(source: T): T {
-    return JSON.parse(JSON.stringify(source));
-  }
 }
 
 export class BudgetSection {

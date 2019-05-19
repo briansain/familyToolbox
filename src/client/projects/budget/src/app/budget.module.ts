@@ -7,6 +7,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BudgetSectionComponent } from './budget-section/budget-section.component';
 import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
+import { DeepCopyService } from 'common';
 
 const routes: Routes = [
   { path: '', component: BudgetAllComponent },
@@ -32,7 +33,7 @@ const routes: Routes = [
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  providers: []// ,
+  providers: [DeepCopyService]// ,
   // bootstrap: [AppComponent]
 })
 export class BudgetModule { }

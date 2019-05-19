@@ -99,3 +99,7 @@ td, .itemHeader {
 td, .amount, .totalAmount {
   vertical-align: middle;
 }
+
+notes {
+  color: black;
+}

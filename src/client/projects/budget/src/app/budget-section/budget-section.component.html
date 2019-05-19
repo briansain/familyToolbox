@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of budgetSection.budgetItems; index as budgetItemIndex">
-            <td *ngIf="item.id !== editorItem.id; else editorHeaderBlock" class="itemHeader">
+            <td *ngIf="item.id !== editorItem.id; else editorHeaderBlock" class="itemHeader" [matTooltip]="item.notes" matTooltipPosition="below" >
                 <span>{{ item.itemHeader }}</span>
                 <button mat-icon-button class="iconButton" (click)="showItemEditor(item)">
                     <mat-icon class="icon">edit</mat-icon>
@@ -19,7 +19,11 @@
             <ng-template #editorHeaderBlock>
                 <td class="itemHeader">
                     <mat-form-field>
-                        <input matInput type="text" placeholder="" [(ngModel)]="item.itemHeader" />
+                        <input matInput type="text" placeholder="" [(ngModel)]="editorItem.itemHeader" />
+                    </mat-form-field>
+                    <br />
+                    <mat-form-field>
+                        <textarea matInput placeholder="Notes" class="notes">{{editorItem.notes}}</textarea>
                     </mat-form-field>
                 </td>
             </ng-template>

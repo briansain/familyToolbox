@@ -89,6 +89,7 @@ export class BudgetSection {
 export class BudgetItem {
   id = "";
   itemHeader = "";
+  notes = "";
   budgetAmounts = Array<BudgetAmount>();
 }
 

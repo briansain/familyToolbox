@@ -14,6 +14,7 @@ export class BudgetAllComponent implements OnInit {
     budgetItems: [{
       id: '1234',
       itemHeader: "Gas",
+      notes: "Hello Notes",
       budgetAmounts: [{
         amount: 80,
         isPaid: false,
@@ -28,6 +29,7 @@ export class BudgetAllComponent implements OnInit {
     },{
       id: '5678',
       itemHeader: "Phone",
+      notes: "",
       budgetAmounts: [{
         amount: 0,
         isPaid: false,

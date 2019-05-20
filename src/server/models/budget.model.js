@@ -20,7 +20,7 @@ const budgetSectionSchema = new Schema({
 const paycheckSchema = new Schema({
   source: String,
   amount: Number,
-  startDat: Date,
+  startDate: Date,
   endDate: Date
 });
 

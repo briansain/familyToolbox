@@ -2,9 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { BudgetAllComponent } from './budget-all/budget-all.component';
+import { BudgetAllComponent } from './components/budget-all/budget-all.component';
 import { Routes, RouterModule } from '@angular/router';
-import { BudgetSectionComponent } from './budget-section/budget-section.component';
+import { BudgetSectionComponent } from './components/budget-section/budget-section.component';
 import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 import { DeepCopyService } from 'common';

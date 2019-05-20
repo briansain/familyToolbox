@@ -10,7 +10,7 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of budgetSection.budgetItems; index as budgetItemIndex">
-            <td *ngIf="item.id !== editorItem.id; else editorHeaderBlock" class="itemHeader" [matTooltip]="item.notes" matTooltipPosition="below" >
+            <td *ngIf="item._id !== editorItem._id; else editorHeaderBlock" class="itemHeader" [matTooltip]="item.notes" matTooltipPosition="below" >
                 <span>{{ item.itemHeader }}</span>
                 <button mat-icon-button class="iconButton" (click)="showItemEditor(item)">
                     <mat-icon class="icon">edit</mat-icon>
@@ -28,7 +28,7 @@
                 </td>
             </ng-template>
             <td *ngFor="let budgetAmount of item.budgetAmounts; index as budgetIndex" [ngClass]="{'amount': budgetAmount.amount}">
-                <span *ngIf="item.id !== editorItem.id; else editBlock">{{ budgetAmount.amount | currency}}</span>
+                <span *ngIf="item._id !== editorItem._id; else editBlock">{{ budgetAmount.amount | currency}}</span>
                 <ng-template #editBlock>
                     <mat-form-field>
                         <input matInput type="number" placeHolder="" class="budgetItem budgetAmountInput" [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].amount" />
@@ -41,14 +41,14 @@
                     <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isAutoPay">Is AutoPay?</mat-checkbox>
                 </ng-template>
             </td>
-            <td class="totalAmount" *ngIf="item.id !== editorItem.id; else editTotalBlock">
+            <td class="totalAmount" *ngIf="item._id !== editorItem._id; else editTotalBlock">
                 <span>{{ getItemSum(item.budgetAmounts) | currency }}</span>
             </td>
             <ng-template #editTotalBlock>
                 <td>
-                    <button mat-raised-button *ngIf="item.id === editorItem.id" class="saveButton" (click)="saveEditor(budgetItemIndex)">Save</button>
+                    <button mat-raised-button *ngIf="item._id === editorItem._id" class="saveButton" (click)="saveEditor(budgetItemIndex)">Save</button>
                     <br />
-                    <button mat-flat-button *ngIf="item.id === editorItem.id" class="cancelButton" (click)="cancel()">Cancel</button>
+                    <button mat-flat-button *ngIf="item._id === editorItem._id" class="cancelButton" (click)="cancel()">Cancel</button>
                 </td>
             </ng-template>
         </tr>

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { DeepCopyService } from 'common';
+import { BudgetItem, BudgetSection } from '../../budget.model';
 
 @Component({
   selector: 'ft-budget-section',
@@ -58,7 +59,7 @@ export class BudgetSectionComponent implements OnInit {
   }
 
   showItemEditor(item: any): void {
-    if (!this.editorItem.id) {    
+    if (!this.editorItem._id) {    
       this.editorItem = this._deepCopy.copy(item);
       // this.editorItem = item;
     } else {
@@ -76,25 +77,3 @@ export class BudgetSectionComponent implements OnInit {
   }
 
 }
-
-export class BudgetSection {
-  id = "";
-  sectionHeader = "";
-  budgetItems = Array<BudgetItem>();
-
-}
-
-export class BudgetItem {
-  id = "";
-  itemHeader = "";
-  notes = "";
-  budgetAmounts = Array<BudgetAmount>();
-}
-
-export class BudgetAmount {
-  amount = 0;
-  isPaid = false;
-  isCash = false;
-  isAutoPay = false;
-}
-

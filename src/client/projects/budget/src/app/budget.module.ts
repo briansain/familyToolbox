@@ -5,9 +5,9 @@ import { AppComponent } from './app.component';
 import { BudgetAllComponent } from './components/budget-all/budget-all.component';
 import { Routes, RouterModule } from '@angular/router';
 import { BudgetSectionComponent } from './components/budget-section/budget-section.component';
-import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule } from '@angular/material';
+import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatMenuModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
-import { DeepCopyService } from 'common';
+import { DeepCopyService, ConfirmDialogComponent } from 'common';
 
 const routes: Routes = [
   { path: '', component: BudgetAllComponent },
@@ -21,6 +21,7 @@ const routes: Routes = [
     BudgetSectionComponent
   ],
   imports: [
+    
     BrowserModule,
     MatIconModule,
     MatButtonModule,
@@ -29,11 +30,12 @@ const routes: Routes = [
     MatCheckboxModule,
     MatDatepickerModule,
     MatNativeDateModule, // TODO: change to a better supported provider
+    MatMenuModule,
     MatTooltipModule,
     FormsModule,
     RouterModule.forChild(routes)
   ],
-  providers: [DeepCopyService]// ,
-  // bootstrap: [AppComponent]
+  providers: [DeepCopyService],
+  entryComponents: [ConfirmDialogComponent]
 })
 export class BudgetModule { }

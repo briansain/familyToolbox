@@ -8,8 +8,9 @@ function getBudget(budgetMonth, response) {
     if (budget) {
       response.status(200).json(budget);
     } else {
-      response.status(400);
+      response.sendStatus(404);
     }
+    return;
   });
 }
 

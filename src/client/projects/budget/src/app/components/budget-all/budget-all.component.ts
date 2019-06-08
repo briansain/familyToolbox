@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { DeepCopyService } from 'common';
+import { DeepCopyService, ConfirmDialogComponent } from 'common';
 import { Budget, Paycheck } from '../../budget.model';
 import { BudgetService } from '../../budget.service';
+import { MatDialog } from '@angular/material';
+import { getDebugNode__POST_R3__ } from '@angular/core/src/debug/debug_node';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'ft-budget-all',
@@ -11,23 +14,42 @@ import { BudgetService } from '../../budget.service';
 export class BudgetAllComponent implements OnInit {
   editPaycheck: Paycheck;
   budget: Budget;
-  budgetMonth: Date;
   dateFormat = 'MM/dd';
+  budgetRetryCount = 0;
+  readonly maxRetryCount = 6;
 
   constructor(private _deepClone: DeepCopyService,
-    private _budgetService: BudgetService) { }
+    private _budgetService: BudgetService,
+    public dialog: MatDialog) { }
 
   ngOnInit() {
-    this.budgetMonth = new Date();
-    this.budgetMonth.setUTCDate(1);
-    this.budgetMonth.setUTCHours(0,0,0,0);
+    let searchBudgetMonth = new Date();
+    searchBudgetMonth.setUTCDate(1);
+    searchBudgetMonth.setUTCHours(0,0,0,0);
+    //searchBudgetMonth.setUTCMonth(4);
 
-    this._budgetService.getBudget(this.budgetMonth).subscribe(resp => {
-      console.log(resp);
-      this.budget = resp;
-    });
+    this.getBudget(searchBudgetMonth);
 
     this.editPaycheck = new Paycheck();
+  }
+
+  getBudget(budgetMonth: Date): void {
+    console.log('getBudget');
+    this._budgetService.getBudget(budgetMonth).subscribe(resp => {
+        this.budget = resp;  
+    }, (error: HttpErrorResponse)  => {
+      console.log(error);
+      if (error.status === 404) {
+        if (this.budgetRetryCount < this.maxRetryCount) {
+          console.log('Retry Count: ' + this.budgetRetryCount + ' out of ' + this.maxRetryCount);
+          this.budgetRetryCount++;
+          budgetMonth.setUTCMonth(budgetMonth.getUTCMonth() - 1);
+          this.getBudget(budgetMonth);
+        } else {
+          alert('There are no budget within the past ' + this.maxRetryCount + ' months');
+        }
+      }
+    });
   }
 
   clickEditPaycheck(paycheck: Paycheck): void {
@@ -41,5 +63,17 @@ export class BudgetAllComponent implements OnInit {
 
   clickCancelPaycheck(): void {
     this.editPaycheck = new Paycheck();
+  }
+
+  clickDuplicateBudget(): void {
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      data: { title: 'Are you sure you want to duplicate this budget for the next month?' }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result && this.budget) {
+        let duplicateBudget = this._deepClone.copy(this.budget);
+      }
+    });
   }
 }

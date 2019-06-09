@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { getDebugNode__POST_R3__ } from '@angular/core/src/debug/debug_node';
 import { HttpErrorResponse } from '@angular/common/http';
 import { TagContentType } from '@angular/compiler';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'ft-budget-all',
@@ -21,9 +22,12 @@ export class BudgetAllComponent implements OnInit {
 
   constructor(private _deepClone: DeepCopyService,
     private _budgetService: BudgetService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private _ngxSpinner: NgxSpinnerService) { }
 
   ngOnInit() {
+    
+    this._ngxSpinner.show();
     let searchBudgetMonth = new Date();
     searchBudgetMonth.setUTCDate(1);
     searchBudgetMonth.setUTCHours(0,0,0,0);
@@ -37,6 +41,7 @@ export class BudgetAllComponent implements OnInit {
   getBudget(budgetMonth: Date): void {
     console.log('getBudget');
     this._budgetService.getBudget(budgetMonth).subscribe(resp => {
+        this._ngxSpinner.hide();
         this.budget = resp;  
     }, (error: HttpErrorResponse)  => {
       console.log(error);
@@ -47,6 +52,7 @@ export class BudgetAllComponent implements OnInit {
           budgetMonth.setUTCMonth(budgetMonth.getUTCMonth() - 1);
           this.getBudget(budgetMonth);
         } else {
+          this._ngxSpinner.hide();
           alert('There are no budget within the past ' + this.maxRetryCount + ' months');
         }
       }
@@ -73,11 +79,12 @@ export class BudgetAllComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && this.budget) {
+        this._ngxSpinner.show();
         let duplicateBudget = this.copyBudget(this.budget);
         duplicateBudget.month.setUTCMonth(duplicateBudget.month.getUTCMonth() + 1);
         duplicateBudget._id = null;
         this._budgetService.addBudget(duplicateBudget).subscribe(response => {
-          console.log(response);
+          this._ngxSpinner.hide();
         });
       }
     });

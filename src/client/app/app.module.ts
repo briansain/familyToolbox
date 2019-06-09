@@ -12,6 +12,8 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
 import { BudgetModule } from '../projects/budget/src/app/budget.module';
+import { NgxSpinnerModule } from 'ngx-spinner';
+
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },
   // { path: 'recipes', component: RecipeListComponent },
@@ -38,7 +40,8 @@ const routes: Routes = [
     MatListModule,
     CommonModule,
     MealPlanningModule,
-    BudgetModule
+    BudgetModule,
+    NgxSpinnerModule
   ],
   exports : [
     RouterModule

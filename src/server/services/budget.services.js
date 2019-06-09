@@ -26,19 +26,13 @@ function getBudgetById(budgetId, response) {
   });
 }
 
-// function postRecipe(requestBody, res) {
-//   const originalRecipe = {
-//     title: requestBody.title,
-//     ingredients: requestBody.ingredients,
-//     directions: requestBody.directions
-//   };
-
-//   const recipe = new Recipe(originalRecipe);
-//   recipe.save(error => {
-//     if (checkServerError(res, error)) return;
-//     res.status(201).json(recipe);
-//   })
-// }
+function addBudget(requestBody, res) {
+  const budget = new Budget(requestBody);
+  budget.save(error => {
+    if (checkServerError(res, error)) return;
+    res.status(201).json(budget);
+  })
+}
 
 // function putRecipe(recipeId, requestBody, resp) {
 //   const originalRecipe = {
@@ -99,7 +93,7 @@ function seedDatabase() {
 module.exports = {
   getBudget,
   getBudgetById,
-  // postRecipe,
+  addBudget,
   // putRecipe,
   // deleteRecipe,
   seedDatabase

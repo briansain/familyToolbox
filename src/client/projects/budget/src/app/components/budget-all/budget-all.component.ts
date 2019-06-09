@@ -5,6 +5,7 @@ import { BudgetService } from '../../budget.service';
 import { MatDialog } from '@angular/material';
 import { getDebugNode__POST_R3__ } from '@angular/core/src/debug/debug_node';
 import { HttpErrorResponse } from '@angular/common/http';
+import { TagContentType } from '@angular/compiler';
 
 @Component({
   selector: 'ft-budget-all',
@@ -72,8 +73,19 @@ export class BudgetAllComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result && this.budget) {
-        let duplicateBudget = this._deepClone.copy(this.budget);
+        let duplicateBudget = this.copyBudget(this.budget);
+        duplicateBudget.month.setUTCMonth(duplicateBudget.month.getUTCMonth() + 1);
+        duplicateBudget._id = null;
+        this._budgetService.addBudget(duplicateBudget).subscribe(response => {
+          console.log(response);
+        });
       }
     });
+  }
+
+  private copyBudget(budget: Budget): Budget {
+    let target = this._deepClone.copy(budget);
+    target.month = new Date(target.month);
+    return target;
   }
 }

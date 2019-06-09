@@ -14,9 +14,9 @@ router.get('/budget/:id', (req, res) => {
   budgetService.getBudgetById(req.params.id, res);
 });
 
-// router.post('/recipes', (req, res) => {
-//   recipeService.postRecipe(req.body, res);
-// });
+router.post('/budget', (req, res) => {
+  budgetService.addBudget(req.body, res);
+});
 
 // router.put('/recipes/:id', (req, res) => {
 //   recipeService.putRecipe(req.params.id, req.body, res);

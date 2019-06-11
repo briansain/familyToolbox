@@ -26,15 +26,11 @@ export class BudgetAllComponent implements OnInit {
     private _ngxSpinner: NgxSpinnerService) { }
 
   ngOnInit() {
-    
     this._ngxSpinner.show();
     let searchBudgetMonth = new Date();
     searchBudgetMonth.setUTCDate(1);
     searchBudgetMonth.setUTCHours(0,0,0,0);
-    //searchBudgetMonth.setUTCMonth(4);
-
     this.getBudget(searchBudgetMonth);
-
     this.editPaycheck = new Paycheck();
   }
 

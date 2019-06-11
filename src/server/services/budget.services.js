@@ -11,7 +11,7 @@ function getBudget(budgetMonth, response) {
       response.sendStatus(404);
     }
     return;
-  });
+  });//.sort({ month: -1 }).limit(1);
 }
 
 function getBudgetById(budgetId, response) {

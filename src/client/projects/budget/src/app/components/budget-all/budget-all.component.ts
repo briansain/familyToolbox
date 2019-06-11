@@ -3,9 +3,7 @@ import { DeepCopyService, ConfirmDialogComponent } from 'common';
 import { Budget, Paycheck } from '../../budget.model';
 import { BudgetService } from '../../budget.service';
 import { MatDialog } from '@angular/material';
-import { getDebugNode__POST_R3__ } from '@angular/core/src/debug/debug_node';
 import { HttpErrorResponse } from '@angular/common/http';
-import { TagContentType } from '@angular/compiler';
 import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
@@ -27,30 +25,14 @@ export class BudgetAllComponent implements OnInit {
 
   ngOnInit() {
     this._ngxSpinner.show();
-    let searchBudgetMonth = new Date();
-    searchBudgetMonth.setUTCDate(1);
-    searchBudgetMonth.setUTCHours(0,0,0,0);
-    this.getBudget(searchBudgetMonth);
     this.editPaycheck = new Paycheck();
-  }
-
-  getBudget(budgetMonth: Date): void {
-    console.log('getBudget');
-    this._budgetService.getBudget(budgetMonth).subscribe(resp => {
+    this._budgetService.getLatestBudget().subscribe(resp => {
         this._ngxSpinner.hide();
         this.budget = resp;  
     }, (error: HttpErrorResponse)  => {
       console.log(error);
       if (error.status === 404) {
-        if (this.budgetRetryCount < this.maxRetryCount) {
-          console.log('Retry Count: ' + this.budgetRetryCount + ' out of ' + this.maxRetryCount);
-          this.budgetRetryCount++;
-          budgetMonth.setUTCMonth(budgetMonth.getUTCMonth() - 1);
-          this.getBudget(budgetMonth);
-        } else {
-          this._ngxSpinner.hide();
-          alert('There are no budget within the past ' + this.maxRetryCount + ' months');
-        }
+        // couldn't find a budget; redirect to new budget screen
       }
     });
   }

@@ -2,7 +2,7 @@ const Budget = require('../models/budget.model');
 const seedData = require('./budget.seed.json')
 
 function getBudget(budgetMonth, response) {
-  Budget.findOne({ month: budgetMonth }, (error, budget) => {
+  Budget.findOne().sort({ month: -1 }).exec((error, budget) => {
     if (checkServerError(error)) return;
 
     if (budget) {
@@ -10,8 +10,7 @@ function getBudget(budgetMonth, response) {
     } else {
       response.sendStatus(404);
     }
-    return;
-  });//.sort({ month: -1 }).limit(1);
+  });
 }
 
 function getBudgetById(budgetId, response) {

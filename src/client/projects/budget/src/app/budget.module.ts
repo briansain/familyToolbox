@@ -11,7 +11,7 @@ import { DeepCopyService, ConfirmDialogComponent } from 'common';
 
 const routes: Routes = [
   { path: '', component: BudgetAllComponent },
-  { path: 'budget', component: BudgetSectionComponent }
+  { path: 'budget', component: BudgetAllComponent }
 ]
 
 @NgModule({

@@ -1,8 +1,20 @@
 const Budget = require('../models/budget.model');
 const seedData = require('./budget.seed.json')
 
-function getBudget(budgetMonth, response) {
+function getLatestBudget(response) {
   Budget.findOne().sort({ month: -1 }).exec((error, budget) => {
+    if (checkServerError(error)) return;
+
+    if (budget) {
+      response.status(200).json(budget);
+    } else {
+      response.sendStatus(404);
+    }
+  });
+}
+
+function getBudget(budgetMonth, response) {
+  Budget.findOne({month: budgetMonth}, (error, budget) => {
     if (checkServerError(error)) return;
 
     if (budget) {
@@ -90,6 +102,7 @@ function seedDatabase() {
 }
 
 module.exports = {
+  getLatestBudget,
   getBudget,
   getBudgetById,
   addBudget,

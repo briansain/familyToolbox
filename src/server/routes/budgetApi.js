@@ -7,6 +7,8 @@ router.get('/budget', (req, res) => {
     const budgetMonth = new Date(req.query.budgetMonth);
     budgetMonth.setUTCHours(0, 0, 0, 0);
     budgetService.getBudget(budgetMonth.toISOString(), res);
+  } else {
+    budgetService.getLatestBudget(res);
   }
 });
 

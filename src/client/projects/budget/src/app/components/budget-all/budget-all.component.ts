@@ -5,6 +5,7 @@ import { BudgetService } from '../../budget.service';
 import { MatDialog } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ft-budget-all',
@@ -21,7 +22,8 @@ export class BudgetAllComponent implements OnInit {
   constructor(private _deepClone: DeepCopyService,
     private _budgetService: BudgetService,
     public dialog: MatDialog,
-    private _ngxSpinner: NgxSpinnerService) { }
+    private _ngxSpinner: NgxSpinnerService,
+    private _router: Router) { }
 
   ngOnInit() {
     this._ngxSpinner.show();
@@ -64,6 +66,8 @@ export class BudgetAllComponent implements OnInit {
         this._budgetService.addBudget(duplicateBudget).subscribe(response => {
           this._ngxSpinner.hide();
         });
+
+        this._router.navigateByUrl('/budget');
       }
     });
   }

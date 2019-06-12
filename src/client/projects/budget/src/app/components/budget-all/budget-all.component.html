@@ -61,6 +61,6 @@
   <br />
 
   <div *ngFor="let budgetSection of budget.sections; index as i">
-    <ft-budget-section [budgetSection]="budgetSection"></ft-budget-section>
+    <ft-budget-section [budgetSection]="budgetSection" [paycheckCount]="budget.paychecks.count"></ft-budget-section>
   </div>
 </div>

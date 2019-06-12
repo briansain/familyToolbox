@@ -6,7 +6,7 @@ import { BudgetAllComponent } from './components/budget-all/budget-all.component
 import { Routes, RouterModule } from '@angular/router';
 import { BudgetSectionComponent } from './components/budget-section/budget-section.component';
 import { MatIconModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatTooltipModule, MatMenuModule } from '@angular/material';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DeepCopyService, ConfirmDialogComponent } from 'common';
 
 const routes: Routes = [
@@ -33,6 +33,7 @@ const routes: Routes = [
     MatMenuModule,
     MatTooltipModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   providers: [DeepCopyService],

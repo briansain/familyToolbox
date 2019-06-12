@@ -10,7 +10,8 @@
     </thead>
     <tbody>
         <tr *ngFor="let item of budgetSection.budgetItems; index as budgetItemIndex">
-            <td *ngIf="item._id !== editorItem._id; else editorHeaderBlock" class="itemHeader" [matTooltip]="item.notes" matTooltipPosition="below" >
+            <td *ngIf="item._id !== editorItem._id; else editorHeaderBlock" class="itemHeader" [matTooltip]="item.notes"
+                matTooltipPosition="below">
                 <span>{{ item.itemHeader }}</span>
                 <button mat-icon-button class="iconButton" (click)="showItemEditor(item)">
                     <mat-icon class="icon">edit</mat-icon>
@@ -27,18 +28,24 @@
                     </mat-form-field>
                 </td>
             </ng-template>
-            <td *ngFor="let budgetAmount of item.budgetAmounts; index as budgetIndex" [ngClass]="{'amount': budgetAmount.amount}">
+            <td *ngFor="let budgetAmount of item.budgetAmounts; index as budgetIndex"
+                [ngClass]="{'amount': budgetAmount.amount}">
                 <span *ngIf="item._id !== editorItem._id; else editBlock">{{ budgetAmount.amount | currency}}</span>
                 <ng-template #editBlock>
                     <mat-form-field>
-                        <input matInput type="number" placeHolder="" class="budgetItem budgetAmountInput" [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].amount" />
+                        <input matInput type="number" placeHolder="" class="budgetItem budgetAmountInput"
+                            [ngClass]="{'amount': editorItem.budgetAmounts[budgetIndex].amount}"
+                            [(ngModel)]="editorItem.budgetAmounts[budgetIndex].amount" />
                     </mat-form-field>
                     <br />
-                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isPaid">Is Paid?</mat-checkbox>
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isPaid">Is Paid?
+                    </mat-checkbox>
                     <br />
-                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isCash">Is Cash?</mat-checkbox>
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isCash">Is Cash?
+                    </mat-checkbox>
                     <br />
-                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isAutoPay">Is AutoPay?</mat-checkbox>
+                    <mat-checkbox class="checkbox" [(ngModel)]="editorItem.budgetAmounts[budgetIndex].isAutoPay">Is
+                        AutoPay?</mat-checkbox>
                 </ng-template>
             </td>
             <td class="totalAmount" *ngIf="item._id !== editorItem._id; else editTotalBlock">
@@ -46,9 +53,11 @@
             </td>
             <ng-template #editTotalBlock>
                 <td>
-                    <button mat-raised-button *ngIf="item._id === editorItem._id" class="saveButton" (click)="saveEditor(budgetItemIndex)">Save</button>
+                    <button mat-raised-button *ngIf="item._id === editorItem._id" class="saveButton"
+                        (click)="saveEditor(budgetItemIndex)">Save</button>
                     <br />
-                    <button mat-flat-button *ngIf="item._id === editorItem._id" class="cancelButton" (click)="cancel()">Cancel</button>
+                    <button mat-flat-button *ngIf="item._id === editorItem._id" class="cancelButton"
+                        (click)="cancel()">Cancel</button>
                 </td>
             </ng-template>
         </tr>
@@ -63,3 +72,72 @@
         </tr>
     </tfoot>
 </table>
+<br />
+<br />
+<form [formGroup]="budgetForm">
+<table>
+        <thead>
+            <tr>
+                <th>
+                    <mat-form-field>
+                        <input matInput placeholder="Header" formControlName="sectionHeader" />
+                    </mat-form-field>
+                </th>
+                <!-- <th *ngFor="let items of paychecks; index as i;">
+                    {{ getPaycheckDescription(i) }}
+                </th> -->
+                <th>Budgeted</th>
+            </tr>
+        </thead>
+        <tbody formArrayName="budgetItems">
+            <tr *ngFor="let budgetItem of budgetItems.controls; index as budgetItemIndex">
+                <div [formGroupName]="budgetItemIndex">
+                    <td class="itemHeader">
+                        <mat-form-field>
+                            <input matInput type="text" placeholder="" formControlName="itemHeader" />
+                        </mat-form-field>
+                        <br />
+                        <mat-form-field>
+                            <textarea matInput placeholder="Notes" class="notes" formControlName="notes"></textarea>
+                        </mat-form-field>
+                    </td>
+                    <td *ngFor="let budgetAmount of getBudgetAmount(budgetItemIndex).controls; index as budgetIndex" formArrayName="budgetAmount">
+                        <div [formGroupName]="budgetIndex">
+                            <mat-form-field>
+                                <input matInput type="number" placeHolder="" class="budgetItem budgetAmountInput"
+                                    [ngClass]="{'amount': getBudgetAmount(budgetItemIndex).value[budgetIndex].amount}"
+                                    formControlName="amount" />
+                            </mat-form-field>
+                            <br />
+                            <mat-checkbox class="checkbox" formControlName="isPaid">
+                                Is Paid?
+                            </mat-checkbox>
+                            <br />
+                            <mat-checkbox class="checkbox" formControlName="isCash">
+                                Is Cash?
+                            </mat-checkbox>
+                            <br />
+                            <mat-checkbox class="checkbox" formControlName="isAutoPay">
+                                Is AutoPay?
+                            </mat-checkbox>
+                        </div>
+                    </td>
+                    <!-- <td class="totalAmount">
+                        <span>{{ getItemSum(item.budgetAmounts) | currency }}</span>
+                    </td> -->
+                </div>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td class="totalHeader">Total</td>
+                <td *ngFor="let paycheck of paychecks; index as i;" class="amount">
+                    {{ getPaycheckTotal(i) | currency }}
+                </td>
+                <td class="totalAmount">
+                    <span>{{ getAllPaycheckTotal() | currency }}</span>
+                </td>
+            </tr>
+        </tfoot>
+</table>
+</form>

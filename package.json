@@ -24,6 +24,7 @@
     "body-parser": "^1.19.0",
     "core-js": "^2.6.9",
     "express": "^4.17.1",
+    "formidable": "^1.2.1",
     "hammerjs": "^2.0.8",
     "mongoose": "^5.7.0",
     "ngx-spinner": "^7.2.0",

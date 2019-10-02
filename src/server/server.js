@@ -7,6 +7,7 @@ const recipeService = require('./services/recipe.services');
 const tagService = require('./services/tag.service');
 const budgetApi = require('./routes/budgetApi');
 const budgetService = require('./services/budget.services');
+const transactionApi = require('./routes/transactionApi');
 
 const port = process.env.PORT || 3000;
 const clientDirectory = process.env.CLIENTDIRECTORY || './dist';
@@ -16,6 +17,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(clientDirectory));
 app.use('/api', recipeApi);
 app.use('/api', budgetApi);
+app.use('/api', transactionApi);
 
 app.get('*', (req, res) => {
     res.sendFile('index.html', { root: clientDirectory });

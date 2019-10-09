@@ -13,6 +13,7 @@ import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
 import { BudgetModule } from '../projects/budget/src/app/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TransactionsModule } from './transactions/transactions.module';
 
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },
@@ -39,6 +40,7 @@ const routes: Routes = [
     MatIconModule,
     MatListModule,
     CommonModule,
+    TransactionsModule,
     MealPlanningModule,
     BudgetModule,
     NgxSpinnerModule

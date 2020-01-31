@@ -5,6 +5,7 @@
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "formidable": "^1.2.1",
     "mongoose": "^5.4.5"

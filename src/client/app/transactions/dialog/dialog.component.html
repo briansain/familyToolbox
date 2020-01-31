@@ -2,7 +2,7 @@
   type="file"
   #file
   style="display: none"
-  (change)="onFilesAdded()"
+  (change)="onFilesAdded($event)"
   multiple
 />
 <div class="container" fxLayout="column" fxLayoutAlign="space-evenly stretch">
@@ -17,6 +17,7 @@
     >
       Add Files
     </button>
+    <!-- <input type="file" (change)="addFiles($event)" /> -->
   </div>
 
   <!-- This is the content of the dialog, containing a list of the files to upload -->

@@ -9,7 +9,7 @@ import { forkJoin } from 'rxjs';
   styleUrls: ['./dialog.component.css']
 })
 export class DialogComponent implements OnInit {
-  @ViewChild('file', {static: false}) file;
+  @ViewChild('file', {static: true}) file;
   public files: Set<File> = new Set();
   progress;
   canBeClosed = true;
@@ -24,12 +24,13 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  addFiles() {
+  addFiles(object: any) {
     this.file.nativeElement.click();
   }
 
-  onFilesAdded() {
-    const files: { [key: string]: File } = this.file.nativeELement.files;
+  onFilesAdded(object: any) {
+    const files: { [key: string]: File } = object.target.files;
+    console.log(files);
     for (let key in files) {
       if (!isNaN(parseInt(key))) {
         this.files.add(files[key]);

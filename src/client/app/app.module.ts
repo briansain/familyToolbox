@@ -14,6 +14,7 @@ import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlannin
 import { BudgetModule } from '../projects/budget/src/app/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransactionsModule } from './transactions/transactions.module';
+import { Transactions2Module } from './transactions2/transactions2.module';
 
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },
@@ -43,7 +44,8 @@ const routes: Routes = [
     TransactionsModule,
     MealPlanningModule,
     BudgetModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    Transactions2Module
   ],
   exports : [
     RouterModule

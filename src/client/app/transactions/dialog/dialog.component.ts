@@ -40,9 +40,9 @@ export class DialogComponent implements OnInit {
 
   closeDialog() {
     // if everything was uploaded already, just close the dialog
-    if (this.uploadSuccessful) {
-      return this.dialogRef.close();
-    }
+    // if (this.uploadSuccessful) {
+    //   return this.dialogRef.close();
+    // }
   
     // set the component state to "uploading"
     this.uploading = true;

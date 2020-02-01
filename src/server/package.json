@@ -8,7 +8,7 @@
     "event-stream": "^4.0.1",
     "express": "^4.16.4",
     "formidable": "^1.2.1",
-    "mongoose": "^5.4.5"
+    "mongoose": "^5.8.11"
   },
   "devDependencies": {},
   "scripts": {

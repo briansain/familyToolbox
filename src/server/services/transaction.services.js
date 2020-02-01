@@ -3,7 +3,7 @@ const IncomingForm = require('formidable').IncomingForm;
 var fs = require('fs');
 var es = require('event-stream');
 
-async function addTransactions(request, response) {
+function addTransactions(request, response) {
   var form = new IncomingForm();
 
   form.on('file', (field, file) => {
@@ -27,6 +27,7 @@ async function addTransactions(request, response) {
           balance: valuesArray[7]
         };
 
+        //should refactor so that status bar on browser reflects status of upload?
         Transaction.exists({ originalDescription: transaction.originalDescription }).then(result => {
           if (result) {
             Transaction.findOneAndUpdate({ originalDescription: transaction.originalDescription }, transaction, (err) => {

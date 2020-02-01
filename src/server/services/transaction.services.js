@@ -7,13 +7,10 @@ function addTransactions(request, response) {
   var form = new IncomingForm();
 
   form.on('file', (field, file) => {
-    console.log(file);
-
     var stream = fs.createReadStream(file.path)
       .pipe(es.split());
 
     stream.on('data', (row) => {
-      console.log(row);
       if (!row.includes('Account') && row.trim()) {
         const valuesArray = row.split(',');
 

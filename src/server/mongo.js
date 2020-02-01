@@ -5,7 +5,8 @@ const mongoUri = 'mongodb://localhost:27017/FamilyToolbox-Recipes'
 function connect() {
   mongoose.set('debug', true);
   return mongoose.connect(mongoUri, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useFindAndModify: false
   })
   .then(() => console.log('Connection to CosmosDB successful'))
   .catch((err) => console.log(err));

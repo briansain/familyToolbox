@@ -1,10 +1,12 @@
 const Transaction = require('../models/transactions.model');
 const IncomingForm = require('formidable').IncomingForm;
+const transactionCategoryService = require('../services/transactionCategory.services');
 var fs = require('fs');
 var es = require('event-stream');
 
-function addTransactions(request, response) {
+async function addTransactions(request, response) {
   var form = new IncomingForm();
+  var transactionCategories = await transactionCategoryService.getCategories();
 
   form.on('file', (field, file) => {
     var stream = fs.createReadStream(file.path)
@@ -31,6 +33,22 @@ function addTransactions(request, response) {
               if (err) throw err;
             });
           } else {
+            
+            var foundMatch = transactionCategories.find(value => {
+              value.matchValues.forEach(valueToMatch => {
+                if(transaction.originalDescription.toLowerCase().indexOf(valueToMatch.toLowerCase()) >= 0) {
+                  return true;
+                }
+              });
+
+              return false;
+            }); 
+
+            if (foundMatch) {
+              transaction.description = foundMatch.description;
+              transaction.category = foundMatch.category;
+            }
+
             Transaction.create(transaction);
           }
         });
@@ -52,6 +70,11 @@ function addTransactions(request, response) {
 
   form.parse(request);
 }
+
+function catelogTransaction(categlogs, transaction) {
+
+}
+
 
 module.exports = {
   addTransactions

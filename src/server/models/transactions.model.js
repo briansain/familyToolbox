@@ -8,7 +8,9 @@ const transactionSchema = new Schema({
     debit: Number,
     credit: Number,
     status: String,
-    balance: Number
+    balance: Number,
+    category: String,
+    description: String,
 });
 const Transaction = mongoose.model('Transaction', transactionSchema);
 

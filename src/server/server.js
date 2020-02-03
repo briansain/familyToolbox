@@ -2,12 +2,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const path = require('path');
+
 const recipeApi = require('./routes/recipeApi');
+const budgetApi = require('./routes/budgetApi');
+const transactionApi = require('./routes/transactionApi');
+
 const recipeService = require('./services/recipe.services');
 const tagService = require('./services/tag.service');
-const budgetApi = require('./routes/budgetApi');
 const budgetService = require('./services/budget.services');
-const transactionApi = require('./routes/transactionApi');
+const transactionCategoryService = require('./services/transactionCategory.services');
 
 const port = process.env.PORT || 3000;
 const clientDirectory = process.env.CLIENTDIRECTORY || './dist';
@@ -28,4 +31,5 @@ app.listen(port, () => {
     recipeService.seedDatabase();
     tagService.seedDatabase();
     budgetService.seedDatabase();
+    transactionCategoryService.seedDatabase();
 });

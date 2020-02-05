@@ -33,22 +33,19 @@ async function addTransactions(request, response) {
               if (err) throw err;
             });
           } else {
-            
             var foundMatch = transactionCategories.find(value => {
-              value.matchValues.forEach(valueToMatch => {
+              return value.matchValues.find(valueToMatch => {
                 if(transaction.originalDescription.toLowerCase().indexOf(valueToMatch.toLowerCase()) >= 0) {
                   return true;
                 }
               });
-
-              return false;
             }); 
-
+    
             if (foundMatch) {
               transaction.description = foundMatch.description;
               transaction.category = foundMatch.category;
-            }
-
+            } 
+  
             Transaction.create(transaction);
           }
         });

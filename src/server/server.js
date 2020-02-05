@@ -10,7 +10,7 @@ const transactionApi = require('./routes/transactionApi');
 const recipeService = require('./services/recipe.services');
 const tagService = require('./services/tag.service');
 const budgetService = require('./services/budget.services');
-const transactionCategoryService = require('./services/transactionCategory.services');
+const budgetCategoryService = require('./services/budgetCategory.services');
 
 const port = process.env.PORT || 3000;
 const clientDirectory = process.env.CLIENTDIRECTORY || './dist';
@@ -31,5 +31,5 @@ app.listen(port, () => {
     recipeService.seedDatabase();
     tagService.seedDatabase();
     budgetService.seedDatabase();
-    transactionCategoryService.seedDatabase();
+    budgetCategoryService.seedDatabase();
 });

@@ -9,7 +9,7 @@ const transactionSchema = new Schema({
     credit: Number,
     status: String,
     balance: Number,
-    category: String,
+    budgetCategory: String,
     description: String,
 });
 const Transaction = mongoose.model('Transaction', transactionSchema);

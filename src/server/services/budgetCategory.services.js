@@ -1,8 +1,8 @@
-const TransactionCategory = require('../models/transactionCategory.model');
-const seedData = require('./transactionCategory.private.seed.json')
+const BudgetCategory = require('../models/budgetCategory.model');
+const seedData = require('./budgetCategory.private.seed.json')
 
 async function getCategories() {
-  return TransactionCategory.find({}).exec();
+  return BudgetCategory.find({}).exec();
 }
 
 
@@ -16,7 +16,7 @@ function checkServerError(res, error) {
 
 function seedDatabase() {
     console.log('running transaction category seed');
-    TransactionCategory.find({}, (err, res) => {
+    BudgetCategory.find({}, (err, res) => {
         if (err) {
             console.log('error running seed');
             console.error(err);
@@ -24,7 +24,7 @@ function seedDatabase() {
         }
         if (res.length === 0) {
             console.log('no records found, running seed');
-            TransactionCategory.insertMany(seedData);
+            BudgetCategory.insertMany(seedData);
         }
     });
 }

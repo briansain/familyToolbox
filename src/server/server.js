@@ -11,6 +11,7 @@ const recipeService = require('./services/recipe.services');
 const tagService = require('./services/tag.service');
 const budgetService = require('./services/budget.services');
 const budgetCategoryService = require('./services/budgetCategory.services');
+const transactionService = require('./services/transaction.services');
 
 const port = process.env.PORT || 3000;
 const clientDirectory = process.env.CLIENTDIRECTORY || './dist';
@@ -32,4 +33,5 @@ app.listen(port, () => {
     tagService.seedDatabase();
     budgetService.seedDatabase();
     budgetCategoryService.seedDatabase();
+    transactionService.getTransactions(new Date(2020,0,1));
 });

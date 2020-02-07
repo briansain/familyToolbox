@@ -4,6 +4,7 @@ const budgetCategoryService = require('./budgetCategory.services');
 var fs = require('fs');
 var es = require('event-stream');
 
+//get rid of request/response as parameters
 async function addTransactions(request, response) {
   var form = new IncomingForm();
   var budgetCategories = await budgetCategoryService.getCategories();
@@ -68,8 +69,19 @@ async function addTransactions(request, response) {
   form.parse(request);
 }
 
+//refactor to be async and get rid of request/response as parameters
+function getTransactions(dateRange) {
+  var beginningOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth(), 1);
+  var endOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth() + 1, 0);
+  Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}).exec().then(result => {
+    console.log(result);
+  });
+  
+}
+
 module.exports = {
-  addTransactions
+  addTransactions,
+  getTransactions
 }
 
 //https://malcoded.com/posts/angular-file-upload-component-with-express/

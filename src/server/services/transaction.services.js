@@ -44,8 +44,10 @@ async function addTransactions(request, response) {
     
             if (foundMatch) {
               transaction.description = foundMatch.description;
-              transaction.category = foundMatch.category;
-            } 
+              transaction.budgetCategory = foundMatch.category;
+            } else {
+              transaction.description = transaction.originalDescription;
+            }
   
             Transaction.create(transaction);
           }
@@ -70,13 +72,12 @@ async function addTransactions(request, response) {
 }
 
 //refactor to be async and get rid of request/response as parameters
-function getTransactions(dateRange) {
+async function getTransactions(dateRange) {
   var beginningOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth(), 1);
   var endOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth() + 1, 0);
-  Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}).exec().then(result => {
-    console.log(result);
-  });
-  
+  var result = await Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}).exec();
+  console.log(result);
+  return result;
 }
 
 module.exports = {

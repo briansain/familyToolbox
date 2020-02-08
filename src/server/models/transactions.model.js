@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const transactionSchema = new Schema({
-    calculatedValue: String,
     accountNumber: String,
     postedDate: Date,
     originalDescription: String,

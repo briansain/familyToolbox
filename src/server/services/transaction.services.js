@@ -43,7 +43,7 @@ async function addTransactions(request, response) {
             }); 
     
             if (foundMatch) {
-              transaction.description = foundMatch.description;
+              transaction.description = foundMatch.description ? foundMatch.description : transaction.originalDescription;
               transaction.budgetCategory = foundMatch.category;
             } else {
               transaction.description = transaction.originalDescription;
@@ -75,7 +75,7 @@ async function addTransactions(request, response) {
 async function getTransactions(dateRange) {
   var beginningOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth(), 1);
   var endOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth() + 1, 0);
-  var result = await Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}).exec();
+  var result = await Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}, null, {sort: {postedDate: 1}}).exec();
   console.log(result);
   return result;
 }

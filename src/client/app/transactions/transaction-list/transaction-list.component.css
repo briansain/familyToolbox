@@ -1,0 +1,9 @@
+.transactionTable {
+  width: 100%
+}
+
+.tableContainer {
+  height: 400px;
+  overflow:auto;
+  width: 75%;
+}

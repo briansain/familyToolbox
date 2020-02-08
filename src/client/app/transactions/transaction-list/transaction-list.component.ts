@@ -9,7 +9,7 @@ import { TransactionService } from '../transaction.service';
 export class TransactionListComponent implements OnInit {
 
   transactions: Transaction[] = [];
-  columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory'];
+  columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory', 'rowActions'];
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {

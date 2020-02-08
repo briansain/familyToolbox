@@ -2,6 +2,8 @@
   <table mat-table [dataSource]="transactions" class="transactionTable">
     <ng-container matColumnDef="postedDate">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>
+      <!--watch for updates on this: https://github.com/angular/components/issues/5982-->
+      <!--could refactor to this: https://netbasal.com/keeping-it-simple-implementing-edit-in-place-in-angular-4fd92c4dfc70-->
       <td mat-cell *matCellDef="let transaction" (click)="transaction.isEditing = !transaction.isEditing">
         <span *ngIf="!transaction.isEditing">{{transaction.postedDate | date}}</span>
         <span *ngIf="transaction.isEditing">Editing!!</span>

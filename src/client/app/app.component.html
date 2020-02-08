@@ -7,13 +7,13 @@
     <mat-nav-list>
       <h3 matSubheader>Recipe Book</h3>
       <a mat-list-item href="#">Home</a>
-      <a mat-list-item href="/recipes">Recipe Book</a>
-      <a mat-list-item href="/transactions">Transactions</a>
-      <a mat-list-item href="/transactions2">Transactions2</a>
+      <a mat-list-item routerLink="/recipes">Recipe Book</a>
+      <a mat-list-item routerLink="/transactions">Transactions</a>
+      <a mat-list-item routerLink="/transactions2">Transactions2</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" style="z-index:100000000">
       <button
         type="button"
         aria-label="Toggle sidenav"

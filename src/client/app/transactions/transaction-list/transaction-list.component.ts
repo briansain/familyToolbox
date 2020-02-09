@@ -45,13 +45,12 @@ export class TransactionListComponent implements OnInit {
     this.transactions.forEach(transaction => {
       let skip = this.shouldSkipTransaction(transaction);
       if (!skip) {
-        var name = transaction.budgetCategory ? transaction.budgetCategory : "Other";
         var index = this.chartData.findIndex(value => {
-          return value.name == name;
+          return value.name == transaction.budgetCategory;
         });
         if (index == -1) {
           this.chartData.push({
-            name: name,
+            name: transaction.budgetCategory,
             value: transaction.debit
           });
         } else {
@@ -65,11 +64,10 @@ export class TransactionListComponent implements OnInit {
 
   logCategory(input: any){
     console.log(input);
-    var nameToMatch = input.name === "Other" ? null : input.name;
-    this.dataSource.filter = nameToMatch;
+    this.dataSource.filter = input.name;
     
     this.transactions.forEach(transaction => {
-      if(transaction.budgetCategory == nameToMatch) {
+      if(transaction.budgetCategory == input.name) {
         if (!this.shouldSkipTransaction(transaction)) {
           console.log(transaction);
         }

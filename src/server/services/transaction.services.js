@@ -21,8 +21,8 @@ async function addTransactions(request, response) {
           accountNumber: valuesArray[0].replace(/"/g, '').trim(),
           postedDate: valuesArray[1],
           originalDescription: valuesArray[3].replace(/"/g, '').trim(),
-          debit: valuesArray[4] ? parseFloat(valuesArray[4]).toFixed(2) : valuesArray[4],
-          credit: valuesArray[5] ? parseFloat(valuesArray[5]).toFixed(2) : valuesArray[5],
+          debit: valuesArray[4],
+          credit: valuesArray[5],
           status: valuesArray[6],
           balance: parseFloat(valuesArray[7])
         };
@@ -40,6 +40,7 @@ async function addTransactions(request, response) {
           transaction.budgetCategory = foundMatch.category;
         } else {
           transaction.description = transaction.originalDescription;
+          transaction.budgetCategory = 'Uncategorized';
         }
 
         //should refactor so that status bar on browser reflects status of upload?

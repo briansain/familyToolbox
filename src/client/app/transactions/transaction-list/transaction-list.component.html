@@ -1,9 +1,10 @@
 <div class="chartContainer">
-  <ngx-charts-pie-chart
-    [results]="chartResults"
+  <ngx-charts-pie-chart *ngIf="finishedCalculatingChart"
+    [results]="chartData"
     labels="true"
     legend="true"
     legendPosition="bottom"
+    (select)="logCategory($event)"
   ></ngx-charts-pie-chart>
 </div>
 

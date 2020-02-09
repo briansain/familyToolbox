@@ -1,3 +1,12 @@
+<div class="chartContainer">
+  <ngx-charts-pie-chart
+    [results]="chartResults"
+    labels="true"
+    legend="true"
+    legendPosition="bottom"
+  ></ngx-charts-pie-chart>
+</div>
+
 <div class="tableContainer">
   <table mat-table [dataSource]="transactions" class="transactionTable">
     <ng-container matColumnDef="postedDate">

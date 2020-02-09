@@ -7,7 +7,20 @@ import { TransactionService } from '../transaction.service';
   styleUrls: ['./transaction-list.component.css']
 })
 export class TransactionListComponent implements OnInit {
-
+  chartResults = [
+    {
+      name: "Eating Out",
+      value: 1000
+    },
+    {
+      name: "Utilities",
+      value: 200
+    },
+    {
+      name: "Other",
+      value: 300
+    }
+  ]
   transactions: Transaction[] = [];
   columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory', 'rowActions'];
   constructor(private transactionService: TransactionService) { }
@@ -18,7 +31,6 @@ export class TransactionListComponent implements OnInit {
       this.transactions = result;
     });
   }
-
 }
 
 export interface Transaction {

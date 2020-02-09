@@ -17,7 +17,7 @@ import { UploadService } from './upload.service'
 import { Routes, RouterModule } from '@angular/router';
 import { TransactionListComponent } from './transaction-list/transaction-list.component'
 import { TransactionService } from './transaction.service'
-
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 const routes: Routes = [
   { path: 'transactions', component: UploadComponent }
 ]
@@ -34,6 +34,7 @@ const routes: Routes = [
     HttpClientModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
+    NgxChartsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [UploadComponent, DialogComponent, TransactionListComponent],

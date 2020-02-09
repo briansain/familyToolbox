@@ -1,13 +1,33 @@
+.chartContainer {
+  width: 50%;
+  float:right;
+  height:500px;
+}
+
+.tableContainer {
+  overflow:auto;
+  width: 50%;
+  float: right;
+}
+
 .transactionTable {
   width: 100%
 }
 
-.tableContainer {
-  height: 400px;
-  overflow:auto;
-  width: 75%;
+
+
+.mat-column-postedDate {
+  width: 15% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }
 
-.mat-column-description {
-  width: 30% !important;
+.mat-column-debit {
+  width: 5% !important;
+}
+
+.mat-column-budgetCategory {
+  width: 10% !important;
+  padding-left: 15px !important;
+  padding-right: 15px !important;
 }

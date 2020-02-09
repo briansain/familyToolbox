@@ -28,16 +28,23 @@ export class TransactionListComponent implements OnInit {
     });
   }
 
-  calculateChartValues() {
+  //only here because of loan payoffs
+  shouldSkipTransaction(transaction: Transaction): boolean {
     var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
+    var found = false;
+    descriptionsToSkip.forEach(element => {
+      if (!found && transaction.originalDescription.toLowerCase().includes(element.toLowerCase())){
+        found = true;
+      }
+    });
+
+    return found;
+  }
+
+  calculateChartValues() {
     this.transactions.forEach(transaction => {
-      let found = false;
-      descriptionsToSkip.forEach(element => {
-        if (!found && transaction.originalDescription.toLowerCase().includes(element.toLowerCase())){
-          found = true;
-        }
-      });
-      if (!found) {
+      let skip = this.shouldSkipTransaction(transaction);
+      if (!skip) {
         var name = transaction.budgetCategory ? transaction.budgetCategory : "Other";
         var index = this.chartData.findIndex(value => {
           return value.name == name;
@@ -59,19 +66,11 @@ export class TransactionListComponent implements OnInit {
   logCategory(input: any){
     console.log(input);
     var nameToMatch = input.name === "Other" ? null : input.name;
-
     this.dataSource.filter = nameToMatch;
     
-    var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
     this.transactions.forEach(transaction => {
       if(transaction.budgetCategory == nameToMatch) {
-        let found = false;
-        descriptionsToSkip.forEach(element => {
-          if (!found && transaction.originalDescription.toLowerCase().includes(element.toLowerCase())){
-            found = true;
-          }
-        });
-        if (!found) {
+        if (!this.shouldSkipTransaction(transaction)) {
           console.log(transaction);
         }
       }

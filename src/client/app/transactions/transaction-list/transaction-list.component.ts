@@ -13,6 +13,31 @@ export class TransactionListComponent implements OnInit {
   columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory'];
   finishedCalculatingChart = false;
   dataSource: MatTableDataSource<Transaction>;
+  colorScheme = {domain:[
+    /* https://coolors.co/ee6352-59cd90-3fa7d6-c1cad6-d4adcf 
+    '#EE6352',
+    '#59CD90',
+    '#3FA7D6',
+    '#424B54',
+    '#D4ADCF'
+    */
+
+    /* https://coolors.co/1b4079-9d8df1-ff8cc6-547aa5-2cf6b3
+     '#9D8DF1',
+   '#1B4079',
+   '#FF8CC6',
+   '#547AA5',
+   '#2CF6B3'
+    
+    */
+  '#A1CEAB',
+  '#D2E5C5',
+  '#4A8391',
+  '#E5E5E3',
+  '#ED908C'
+
+
+  ]};
 
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
@@ -38,6 +63,10 @@ export class TransactionListComponent implements OnInit {
       }
     });
 
+    if (!found) {
+      found = transaction.description.toLowerCase().includes('paypal') &&
+        transaction.debit == 1000;
+    }
     return found;
   }
 

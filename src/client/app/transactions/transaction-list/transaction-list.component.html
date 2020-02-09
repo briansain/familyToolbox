@@ -5,9 +5,13 @@
     legend="true"
     legendPosition="bottom"
     (select)="logCategory($event)"
+    [scheme]="colorScheme"
+    animations="true"
   ></ngx-charts-pie-chart>
 </div>
-
+<!--
+  gradient="true"
+-->
 
 <div class="tableContainer">
   <button mat-button (click)="clearFilter()">Clear Filter</button>

@@ -8,8 +8,9 @@
   ></ngx-charts-pie-chart>
 </div>
 
+<button mat-button (click)="clearFilter()">Clear Filter</button>
 <div class="tableContainer">
-  <table mat-table [dataSource]="transactions" class="transactionTable">
+  <table mat-table [dataSource]="dataSource" class="transactionTable">
     <ng-container matColumnDef="postedDate">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>
       <!--watch for updates on this: https://github.com/angular/components/issues/5982-->

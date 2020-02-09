@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { TransactionService } from '../transaction.service';
+import { MatTableDataSource, MatTab, MatSort } from '@angular/material';
 
 @Component({
   selector: 'ft-transaction-list',
@@ -9,14 +10,20 @@ import { TransactionService } from '../transaction.service';
 export class TransactionListComponent implements OnInit {
   chartData = [];
   transactions: Transaction[] = [];
-  columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory', 'rowActions'];
+  columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory'];
   finishedCalculatingChart = false;
+  dataSource: MatTableDataSource<Transaction>;
+
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
     var dateRange = new Date(2020, 0, 13);//new Date(Date.now());
     this.transactionService.getTransactions(dateRange).subscribe(result => {
       this.transactions = result;
+      this.dataSource = new MatTableDataSource(this.transactions);
+      this.dataSource.sort = this.sort;
       this.calculateChartValues()
     });
   }
@@ -52,8 +59,10 @@ export class TransactionListComponent implements OnInit {
   logCategory(input: any){
     console.log(input);
     var nameToMatch = input.name === "Other" ? null : input.name;
-    var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
+
+    this.dataSource.filter = nameToMatch;
     
+    var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
     this.transactions.forEach(transaction => {
       if(transaction.budgetCategory == nameToMatch) {
         let found = false;
@@ -67,6 +76,10 @@ export class TransactionListComponent implements OnInit {
         }
       }
     });
+  }
+
+  clearFilter() {
+    this.dataSource.filter = null;
   }
 }
 

@@ -28,8 +28,10 @@ export class TransactionListComponent implements OnInit {
    '#FF8CC6',
    '#547AA5',
    '#2CF6B3'
-    
     */
+
+
+    /*https://www.design-seeds.com/spring-issue-no-2/rock-candy/*/
   '#A1CEAB',
   '#D2E5C5',
   '#4A8391',

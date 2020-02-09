@@ -27,6 +27,21 @@ async function addTransactions(request, response) {
           balance: parseFloat(valuesArray[7])
         };
 
+        var foundMatch = budgetCategories.find(value => {
+          return value.matchValues.find(valueToMatch => {
+            if(transaction.originalDescription.toLowerCase().indexOf(valueToMatch.toLowerCase()) >= 0) {
+              return true;
+            }
+          });
+        }); 
+
+        if (foundMatch) {
+          transaction.description = foundMatch.description ? foundMatch.description : transaction.originalDescription;
+          transaction.budgetCategory = foundMatch.category;
+        } else {
+          transaction.description = transaction.originalDescription;
+        }
+
         //should refactor so that status bar on browser reflects status of upload?
         Transaction.exists({ originalDescription: transaction.originalDescription }).then(result => {
           if (result) {
@@ -34,20 +49,7 @@ async function addTransactions(request, response) {
               if (err) throw err;
             });
           } else {
-            var foundMatch = budgetCategories.find(value => {
-              return value.matchValues.find(valueToMatch => {
-                if(transaction.originalDescription.toLowerCase().indexOf(valueToMatch.toLowerCase()) >= 0) {
-                  return true;
-                }
-              });
-            }); 
-    
-            if (foundMatch) {
-              transaction.description = foundMatch.description ? foundMatch.description : transaction.originalDescription;
-              transaction.budgetCategory = foundMatch.category;
-            } else {
-              transaction.description = transaction.originalDescription;
-            }
+            
   
             Transaction.create(transaction);
           }

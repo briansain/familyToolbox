@@ -14,7 +14,7 @@
 -->
 
 <div class="tableContainer">
-  <button mat-button (click)="clearFilter()">Clear Filter</button>
+  <button mat-button mat-raised-button (click)="clearFilter()" color="accent" style="margin-bottom:10px">Clear Filter</button>
   <table mat-table [dataSource]="dataSource" class="transactionTable">
     <ng-container matColumnDef="postedDate">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>

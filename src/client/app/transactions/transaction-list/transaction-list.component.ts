@@ -31,12 +31,44 @@ export class TransactionListComponent implements OnInit {
     */
 
 
-    /*https://www.design-seeds.com/spring-issue-no-2/rock-candy/*/
+    /*https://www.design-seeds.com/spring-issue-no-2/rock-candy/
   '#A1CEAB',
   '#D2E5C5',
   '#4A8391',
   '#E5E5E3',
   '#ED908C'
+*/
+
+/*Liked https://www.design-seeds.com/edible-hues/culinary-color/fresh-hues-47/
+    '#E87F4D',
+    '#2F4A57',
+    '#7BA6B4',
+    '#3A5E48',
+    //'#A5BFC5',
+    //'#4F788D' */
+
+    /* https://www.design-seeds.com/wander/wanderlust/a-door-hues-53/ 
+    '#D9BD7D',
+    '#2D83AC',
+    '#323B40',
+    '#73CDE3'*/
+
+    /* REALLY LIKE https://www.design-seeds.com/seasons/summer/summer-sea/ */
+    '#3B6271',
+    '#3A76AE',
+    '#5BB7DC',
+    '#A0E9F2',
+    '#D9F8F6'
+
+
+    /* https://www.design-seeds.com/in-nature/creatures/feathered-hues-3/ 
+    '#415771',
+    '#40698E',
+    '#6DB1C8',
+    '#85C8CD',
+*/
+
+
 
 
   ]};
@@ -72,6 +104,7 @@ export class TransactionListComponent implements OnInit {
     return found;
   }
 
+  //TODO: order by max value so that colors are applied better
   calculateChartValues() {
     this.transactions.forEach(transaction => {
       let skip = this.shouldSkipTransaction(transaction);
@@ -88,6 +121,17 @@ export class TransactionListComponent implements OnInit {
           this.chartData[index].value += transaction.debit;
         }
       }
+    });
+    this.chartData.sort((a, b) => {
+      if (a.value < b.value) {
+        return -1;
+      }
+
+      if (a.value > b.value) {
+        return 1;
+      }
+
+      return 0;
     });
     console.log(this.chartData);
     this.finishedCalculatingChart = true;

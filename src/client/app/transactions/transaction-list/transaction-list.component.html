@@ -14,7 +14,27 @@
 -->
 
 <div class="tableContainer">
-  <button mat-button (click)="clearFilter()" style="margin-bottom:10px">Clear Filter</button>
+  <button mat-button (click)="clearCategoryFilter()" style="margin-bottom:10px">Clear Category Filter</button>
+  <div>
+    <label for="filterType">Date Filter Type: </label>
+    <select id="filterType" [(ngModel)]="filterType">
+      <option [value]="dateRangeType">{{dateRangeType}}</option>
+      <option [value]="wholeMonthType">{{wholeMonthType}}</option>
+    </select>
+  </div>
+  <div *ngIf="filterType === dateRangeType">
+    <label for="startDate">Start Date: </label>
+    <input type="text" id="startDateFilter" placeholder="mm/dd/yyyy" [(ngModel)]="startDate" style="width: 120px"/>
+    <label for="endDate">End Date: </label>
+    <input type="text" id="endDateFilter" placeholder="mm/dd/yyyy" [(ngModel)]="endDate" style="width: 120px"/>
+  </div>
+  <div *ngIf="filterType === wholeMonthType">
+    <label for="wholeMonth">Select an whole month: </label>
+    <select id="wholeMonth" [(ngModel)]="wholeMonthValue">
+      <option *ngFor="let month of months" [value]="month.index">{{month.name}}</option>
+    </select>
+  </div>
+  <button mat-button mat-raised-button (click)="filterDate()" color="accent">Filter By Date</button>
   <table mat-table [dataSource]="dataSource" class="transactionTable">
     <ng-container matColumnDef="postedDate">
       <th mat-header-cell *matHeaderCellDef> Posted Date </th>

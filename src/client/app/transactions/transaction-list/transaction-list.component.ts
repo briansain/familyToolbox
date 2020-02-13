@@ -13,6 +13,17 @@ export class TransactionListComponent implements OnInit {
   columnsToDisplay = ['postedDate', 'description', 'debit', 'budgetCategory'];
   finishedCalculatingChart = false;
   dataSource: MatTableDataSource<Transaction>;
+  filterType: string;
+  dateRangeType = "Date Range";
+  wholeMonthType = "Whole Month";
+  wholeMonthValue: string;
+  months = [
+    { index: 0, name: 'Janurary' },
+    { index: 1, name: 'Feburary' },
+    { index: 2, name: 'March' }
+  ];
+  startDateFilter: string;
+  endDateFilter: string;
   colorScheme = {domain:[
     /* https://coolors.co/ee6352-59cd90-3fa7d6-c1cad6-d4adcf 
     '#EE6352',
@@ -78,13 +89,14 @@ export class TransactionListComponent implements OnInit {
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
-    var dateRange = new Date(2020, 0, 13);//new Date(Date.now());
-    this.transactionService.getTransactions(dateRange).subscribe(result => {
-      this.transactions = result;
-      this.dataSource = new MatTableDataSource(this.transactions);
-      this.dataSource.sort = this.sort;
-      this.calculateChartValues()
-    });
+    var startRange = new Date(2020, 0, 1);//new Date(Date.now());
+    var endRange = new Date(2020, 1, 0);
+
+    this.populateDataSource(startRange, endRange);
+    
+    this.filterType = this.wholeMonthType;
+    //this.wholeMonthValue = new Date().getMonth();
+    this.wholeMonthValue = startRange.getMonth().toString();
   }
 
   //only here because of loan payoffs
@@ -133,7 +145,6 @@ export class TransactionListComponent implements OnInit {
 
       return 0;
     });
-    console.log(this.chartData);
     this.finishedCalculatingChart = true;
   }
 
@@ -150,8 +161,36 @@ export class TransactionListComponent implements OnInit {
     });
   }
 
-  clearFilter() {
+  clearCategoryFilter() {
     this.dataSource.filter = null;
+  }
+
+  populateDataSource(startDate: Date, endDate: Date) {
+    console.log('startDate: ' + startDate.toLocaleDateString());
+    console.log('endDate: ' + endDate.toLocaleDateString());
+    this.transactionService.getTransactions(startDate, endDate).subscribe(result => {
+      this.dataSource = new MatTableDataSource(result);
+      this.dataSource.sort = this.sort;
+      this.transactions = result;
+      this.calculateChartValues();
+    });
+  }
+
+  filterDate() {
+    var startParameter: Date;
+    var endParameter: Date;
+    switch(this.filterType) {
+      case this.dateRangeType: 
+        var dateSplit = this.startDateFilter
+        startParameter = new Date(this.startDateFilter);
+        endParameter = new Date(this.endDateFilter);
+        break;
+      case this.wholeMonthType:
+        startParameter = new Date(2020, Number.parseInt(this.wholeMonthValue), 1);
+        endParameter = new Date(2020, Number.parseInt(this.wholeMonthValue) + 1, 0);
+        break;
+    }
+    this.populateDataSource(startParameter, endParameter);
   }
 }
 

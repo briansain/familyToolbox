@@ -10,7 +10,10 @@ export class TransactionService {
 
   constructor(private _client: HttpClient) { }
 
-  public getTransactions(dateRange: Date): Observable<any> {
-    return this._client.get<any>(url + '?dateRange='+dateRange.toLocaleDateString());
+  public getTransactions(startDate: Date, endDate: Date): Observable<any> {
+    return this._client.get<any>(
+      url 
+      + '?startDate='+startDate.toLocaleDateString()
+      + '&endDate=' + endDate.toLocaleDateString());
   }
 }

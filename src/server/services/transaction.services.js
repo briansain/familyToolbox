@@ -75,9 +75,9 @@ async function addTransactions(request, response) {
 }
 
 //refactor to be async and get rid of request/response as parameters
-async function getTransactions(dateRange) {
-  var beginningOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth(), 1);
-  var endOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth() + 1, 0);
+async function getTransactions(beginningOfMonth, endOfMonth) {
+  //var beginningOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth(), 1);
+  //var endOfMonth = new Date(dateRange.getFullYear(), dateRange.getMonth() + 1, 0);
   var result = await Transaction.find({postedDate: {$gte: beginningOfMonth, $lte: endOfMonth}}, null, {sort: {postedDate: 1}}).exec();
   console.log(result);
   return result;

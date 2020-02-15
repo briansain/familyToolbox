@@ -8,6 +8,8 @@ import {
   MatProgressBarModule,
   MatTableModule,
   MatIconModule,
+  MatRadioModule,
+  MatFormFieldModule,
 } from '@angular/material'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { FlexLayoutModule } from '@angular/flex-layout'
@@ -37,6 +39,8 @@ const routes: Routes = [
     MatProgressBarModule,
     NgxChartsModule,
     FormsModule,
+    MatRadioModule,
+    MatFormFieldModule,
     RouterModule.forChild(routes)
   ],
   declarations: [UploadComponent, DialogComponent, TransactionListComponent],

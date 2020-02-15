@@ -17,14 +17,18 @@
   <button mat-button (click)="clearCategoryFilter()" style="margin-bottom:10px">Clear Category Filter</button>
   <div>
     <label for="filterType">Date Filter Type: </label>
-    <select id="filterType" [(ngModel)]="filterType">
-      <option [value]="dateRangeType">{{dateRangeType}}</option>
-      <option [value]="wholeMonthType">{{wholeMonthType}}</option>
-    </select>
+    <mat-radio-group id="filterType" [(ngModel)]="filterType">
+      <mat-radio-button class="radio-button" [value]="dateRangeType">{{dateRangeType}}</mat-radio-button>
+      <mat-radio-button class="radio-button" [value]="wholeMonthType">{{wholeMonthType}}</mat-radio-button>
+    </mat-radio-group>
   </div>
   <div *ngIf="filterType === dateRangeType">
+    <!-- <mat-form-field>
+      <mat-label>Start Date:</mat-label>
+      <input matInput [(ngModel)]="startDate"  placeholder="mm/dd/yyyy" style="width: 120px" />
+    </mat-form-field> -->
     <label for="startDate">Start Date: </label>
-    <input type="text" id="startDateFilter" placeholder="mm/dd/yyyy" [(ngModel)]="startDate" style="width: 120px"/>
+    <input type="text" id="startDateFilter" placeholder="mm/dd/yyyy" [(ngModel)]="startDate" />
     <label for="endDate">End Date: </label>
     <input type="text" id="endDateFilter" placeholder="mm/dd/yyyy" [(ngModel)]="endDate" style="width: 120px"/>
   </div>

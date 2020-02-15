@@ -33,5 +33,4 @@ app.listen(port, () => {
     tagService.seedDatabase();
     budgetService.seedDatabase();
     budgetCategoryService.seedDatabase();
-    transactionService.getTransactions(new Date(2020,0,1));
 });

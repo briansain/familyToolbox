@@ -1,0 +1,15 @@
+<table mat-table [dataSource]="budgetItems" class="mat-elevation-z8">
+  <ng-container matColumnDef="header">
+    <th mat-header-cell *matHeaderCellDef>{{sectionHeader}}</th>
+    <td mat-cell *matCellDef="let budgetItem">{{budgetItem.itemHeader}}</td>
+    <th mat-footer-cell *matFooterCellDef>Total</th>
+  </ng-container>
+  
+  <ng-container matColumnDef="budgetAmount">
+    <th mat-header-cell *matHeaderCellDef>Budgeted</th>
+    <td mat-cell *matCellDef="let budgetItem">{{getBudgetedAmount(budgetItem.budgetAmount)}}</td>
+    <th mat-footer-cell *matFooterCellDef>{{getGrandBudgetTotal(budgetItem)}}</th>
+  </ng-container>
+
+  <ng-container *ngFor="let budgetAmount of budgetItems.budgetAmounts; index as i" [matColumnDef]="'budgetAmount'" ></ng-container>
+</table>

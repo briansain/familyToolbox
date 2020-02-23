@@ -16,6 +16,7 @@ import { BudgetModule } from './budget/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransactionsModule } from './transactions/transactions.module';
 import { Transactions2Module } from './transactions2/transactions2.module';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },
@@ -23,21 +24,24 @@ const routes: Routes = [
   // { path: 'recipe/new', component: RecipeNewComponent },
   // { path: 'recipe/:id', component: RecipeComponent },
   // { path: 'recipe/:id/edit', component: RecipeEditComponent }
-  { path: 'budget', loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule) }
+  { path: '', component: HomeComponent },
+  { path: 'budget', loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule) },
 
 ]
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent
   ],
   imports: [
+    RouterModule.forRoot(routes),
     BudgetModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDividerModule,
-    RouterModule.forRoot(routes),
+    
     ReactiveFormsModule,
     LayoutModule,
     MatToolbarModule,
@@ -45,10 +49,9 @@ const routes: Routes = [
     MatIconModule,
     MatListModule,
     CommonModule,
-    TransactionsModule,
-    MealPlanningModule,
+    // TransactionsModule,
+    // MealPlanningModule,
     NgxSpinnerModule,
-    Transactions2Module
   ],
   exports : [
     RouterModule

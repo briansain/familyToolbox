@@ -11,7 +11,8 @@ import { MatDividerModule, MatToolbarModule, MatSidenavModule, MatIconModule, Ma
 import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
-import { BudgetModule } from '../projects/budget/src/app/budget.module';
+// import { BudgetModule } from '../projects/budget/src/app/budget.module';
+import { BudgetModule } from './budget/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransactionsModule } from './transactions/transactions.module';
 import { Transactions2Module } from './transactions2/transactions2.module';
@@ -22,6 +23,8 @@ const routes: Routes = [
   // { path: 'recipe/new', component: RecipeNewComponent },
   // { path: 'recipe/:id', component: RecipeComponent },
   // { path: 'recipe/:id/edit', component: RecipeEditComponent }
+  { path: 'budget', loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule) }
+
 ]
 
 @NgModule({
@@ -29,6 +32,7 @@ const routes: Routes = [
     AppComponent
   ],
   imports: [
+    BudgetModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
@@ -43,7 +47,6 @@ const routes: Routes = [
     CommonModule,
     TransactionsModule,
     MealPlanningModule,
-    BudgetModule,
     NgxSpinnerModule,
     Transactions2Module
   ],

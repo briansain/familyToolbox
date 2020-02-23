@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DeepCopyService, ConfirmDialogComponent } from 'common';
 import { Budget, Paycheck } from '../../budget.model';
 import { BudgetService } from '../../budget.service';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Router } from '@angular/router';
@@ -17,6 +17,9 @@ export class BudgetAllComponent implements OnInit {
   budget: Budget;
   dateFormat = 'MM/dd';
   budgetRetryCount = 0;
+  editBudgetName: any;
+  addBudgetSection: any;
+  changeBudget: any;
   readonly maxRetryCount = 6;
 
   constructor(private _deepClone: DeepCopyService,

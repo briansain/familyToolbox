@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "deleteOutputPath": false,
             "outputPath": "dist/",
             "index": "src/client/index.html",

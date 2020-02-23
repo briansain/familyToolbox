@@ -4,7 +4,7 @@ import { BudgetSectionComponent } from './budget-section/budget-section.componen
 
 
 const routes: Routes = [
-  { path: 'asdf', component: BudgetSectionComponent}
+  { path: '', component: BudgetSectionComponent}
 ];
 
 @NgModule({

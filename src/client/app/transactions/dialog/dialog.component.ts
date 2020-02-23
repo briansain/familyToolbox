@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { MatDialogRef } from '@angular/material/dialog';
 import { UploadService } from '../upload.service';
 import { forkJoin } from 'rxjs';
 
@@ -24,7 +24,7 @@ export class DialogComponent implements OnInit {
   ngOnInit() {
   }
 
-  addFiles(object: any) {
+  addFiles() {
     this.file.nativeElement.click();
   }
 

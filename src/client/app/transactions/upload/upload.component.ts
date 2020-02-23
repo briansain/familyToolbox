@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
 import { UploadService } from '../upload.service';
 import { DialogComponent } from '../dialog/dialog.component';
 
@@ -9,7 +9,7 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-  @ViewChild('file', {static: false}) file;
+  @ViewChild('file') file;
   
   public files: Set<File> = new Set();
 

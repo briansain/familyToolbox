@@ -7,7 +7,10 @@ import { RecipeComponent } from './recipes/recipe/recipe.component';
 import { RecipeEditComponent } from './recipes/recipe-edit/recipe-edit.component';
 import { RecipeNewComponent } from './recipes/recipe-new/recipe-new.component';
 import { RouterModule, Routes } from '@angular/router';
-import { MatCardModule, MatFormFieldModule, MatButtonModule, MatInputModule } from '@angular/material';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
 const routes: Routes = [
   // { path: '', component: RecipeListComponent },

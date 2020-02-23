@@ -7,8 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 
-import { MatDividerModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatButtonModule, MatDialogModule, MatProgressBarModule } from '@angular/material';
-import { LayoutModule } from '@angular/cdk/layout';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+// import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
 // import { BudgetModule } from '../projects/budget/src/app/budget.module';
@@ -35,23 +42,24 @@ const routes: Routes = [
     HomeComponent
   ],
   imports: [
-    RouterModule.forRoot(routes),
-    BudgetModule,
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatDividerModule,
     
     ReactiveFormsModule,
-    LayoutModule,
+    // LayoutModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
     CommonModule,
     // TransactionsModule,
-    // MealPlanningModule,
+    MealPlanningModule,
     NgxSpinnerModule,
+    RouterModule.forRoot(routes),
+    BudgetModule,
+
   ],
   exports : [
     RouterModule

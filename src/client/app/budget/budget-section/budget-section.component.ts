@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { MatTable } from '@angular/material';
 
 @Component({
   selector: 'ft-budget-section',
   templateUrl: './budget-section.component.html',
   styleUrls: ['./budget-section.component.css']
 })
-export class BudgetSectionComponent implements OnInit {
-
+export class BudgetSectionComponent implements OnInit, AfterViewInit {
   sectionHeader = "Utilities";
+  paycheckArray: Array<any>;
   budgetItems: BudgetItem[] = [
       {
         itemHeader: "Gas",
@@ -47,11 +48,26 @@ export class BudgetSectionComponent implements OnInit {
       }
     ];
   displayColumns = [
-    'header','budgeted'//,'budgetAmount1','budgetAmount2'
+    'header','budgeted'
   ]
   constructor() { }
 
   ngOnInit() {
+    const countOfPaychecks = 2; // TODO: fix this to be dynamic
+    this.paycheckArray = new Array(countOfPaychecks);
+    for (let i = 0; i < countOfPaychecks; i++) this.displayColumns.push(i.toString());
+  }
+
+  ngAfterViewInit() {
+  }
+
+  addColumn() {
+    this.displayColumns.push('0');
+  }
+
+  getHeader(index: number): string{
+    console.log(index);
+    return 'budgetAmount' + index;
   }
 
   getBudgetedAmount(budgetAmounts: BudgetAmount[]): number {
@@ -68,7 +84,7 @@ export class BudgetSectionComponent implements OnInit {
     return total;
   }
 
-  getPaycheckIndex(index: number): string {
+  getPaycheck(index: number): string {
     let paycheck: string;
     if (index == 0) {
       paycheck = "1st Paycheck";

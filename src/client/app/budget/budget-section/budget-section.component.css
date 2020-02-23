@@ -1,3 +1,7 @@
 .budget-table {
   width: 100%;
 }
+
+.table-footer {
+  font-weight: none;
+}

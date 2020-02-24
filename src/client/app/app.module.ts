@@ -21,7 +21,6 @@ import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlannin
 import { BudgetModule } from './budget/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransactionsModule } from './transactions/transactions.module';
-import { Transactions2Module } from './transactions2/transactions2.module';
 import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [

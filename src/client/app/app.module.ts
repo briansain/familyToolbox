@@ -15,10 +15,9 @@ import { MatListModule } from '@angular/material/list';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
-// import { LayoutModule } from '@angular/cdk/layout';
+import { LayoutModule } from '@angular/cdk/layout';
 import { CommonModule } from 'common';
 import { MealPlanningModule } from '../projects/mealPlanning/src/app/mealPlanning.module';
-// import { BudgetModule } from '../projects/budget/src/app/budget.module';
 import { BudgetModule } from './budget/budget.module';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TransactionsModule } from './transactions/transactions.module';
@@ -31,8 +30,8 @@ const routes: Routes = [
   // { path: 'recipe/new', component: RecipeNewComponent },
   // { path: 'recipe/:id', component: RecipeComponent },
   // { path: 'recipe/:id/edit', component: RecipeEditComponent }
-  { path: '', component: HomeComponent },
   { path: 'budget', loadChildren: () => import('./budget/budget.module').then(m => m.BudgetModule) },
+  { path: '', component: HomeComponent },
 
 ]
 
@@ -42,24 +41,28 @@ const routes: Routes = [
     HomeComponent
   ],
   imports: [
+    // Angular
     BrowserModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    MatDividerModule,
-    
     ReactiveFormsModule,
-    // LayoutModule,
+    LayoutModule,
+    
+    // Material
+    MatDividerModule,
     MatToolbarModule,
     MatSidenavModule,
     MatIconModule,
     MatListModule,
-    CommonModule,
-    // TransactionsModule,
-    MealPlanningModule,
-    NgxSpinnerModule,
-    RouterModule.forRoot(routes),
-    BudgetModule,
 
+    // 3rd Party
+    NgxSpinnerModule,
+
+    // Family Toolbox
+    CommonModule,
+    TransactionsModule,
+    MealPlanningModule,
+    RouterModule.forRoot(routes),
   ],
   exports : [
     RouterModule

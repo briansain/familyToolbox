@@ -5,11 +5,9 @@
       [opened]="!(isHandset$ | async)">
     <mat-toolbar>Menu</mat-toolbar>
     <mat-nav-list>
-      <h3 matSubheader>Recipe Book</h3>
-      <a mat-list-item href="#">Home</a>
       <a mat-list-item routerLink="/recipes">Recipe Book</a>
       <a mat-list-item routerLink="/transactions">Transactions</a>
-      <a mat-list-item routerLink="/transactions2">Transactions2</a>
+      <a mat-list-item routerLink="/budget">Budget</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -22,7 +20,7 @@
         *ngIf="isHandset$ | async">
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
-      <a href="/" style="color:white; text-decoration:none">
+      <a routerLink="/" style="color:white; text-decoration:none">
         <span>FamilyToolbox</span>
       </a>
     </mat-toolbar>

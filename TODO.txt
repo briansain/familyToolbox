@@ -10,3 +10,16 @@ add meal planning
 
 Budget
     manage recipes
+
+
+
+budget categories:
+
+1. Housing
+2. Utilities
+3. Food
+4. Debt
+5. Transportation
+6. Uncategorized
+7. Entertainment
+8. Shopping

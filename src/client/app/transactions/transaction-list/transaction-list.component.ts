@@ -3,6 +3,7 @@ import { TransactionService } from '../transaction.service';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatTab } from '@angular/material/tabs';
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 
 @Component({
   selector: 'ft-transaction-list',
@@ -91,8 +92,8 @@ export class TransactionListComponent implements OnInit {
   constructor(private transactionService: TransactionService) { }
 
   ngOnInit() {
-    var startRange = new Date(2020, 0, 1);//new Date(Date.now());
-    var endRange = new Date(2020, 1, 0);
+    var startRange = new Date(2020, 1, 1);//new Date(Date.now());
+    var endRange = new Date(2020, 2, 0);
 
     this.populateDataSource(startRange, endRange);
     
@@ -103,40 +104,44 @@ export class TransactionListComponent implements OnInit {
 
   //only here because of loan payoffs
   shouldSkipTransaction(transaction: Transaction): boolean {
-    var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
-    var found = false;
-    descriptionsToSkip.forEach(element => {
-      if (!found && transaction.originalDescription.toLowerCase().includes(element.toLowerCase())){
-        found = true;
-      }
-    });
+    // var descriptionsToSkip = ['ACH DISCOVER', 'chase', 'BANKCARD', 'COMENITY', 'CARDMEMBER SERV'];
+    // var found = false;
+    // descriptionsToSkip.forEach(element => {
+    //   if (!found && transaction.originalDescription.toLowerCase().includes(element.toLowerCase())){
+    //     found = true;
+    //   }
+    // });
 
-    if (!found) {
-      found = transaction.description.toLowerCase().includes('paypal') &&
-        transaction.debit == 1000;
-    }
-    return found;
+    // if (!found) {
+    //   found = transaction.description.toLowerCase().includes('paypal') &&
+    //     transaction.debit == 1000;
+    // }
+    return false;
   }
 
   //TODO: order by max value so that colors are applied better
-  calculateChartValues() {
-    this.transactions.forEach(transaction => {
+  calculateChartValues(input: any[], groupByDescription = false) {
+    console.log('start calculateChartValues; groupByDescription:' + groupByDescription);
+    this.finishedCalculatingChart = false;
+    const tempChartData = [];
+    input.forEach(transaction => {
       let skip = this.shouldSkipTransaction(transaction);
       if (!skip) {
-        var index = this.chartData.findIndex(value => {
-          return value.name == transaction.budgetCategory;
+        var index = tempChartData.findIndex(value => {
+          return groupByDescription ? value.name == transaction.description : value.name == transaction.budgetCategory;
         });
         if (index == -1) {
-          this.chartData.push({
-            name: transaction.budgetCategory,
+          let name = groupByDescription ? transaction.description : transaction.budgetCategory
+          tempChartData.push({
+            name: name,
             value: transaction.debit
           });
         } else {
-          this.chartData[index].value += transaction.debit;
+          tempChartData[index].value += transaction.debit;
         }
       }
     });
-    this.chartData.sort((a, b) => {
+    tempChartData.sort((a, b) => {
       if (a.value < b.value) {
         return -1;
       }
@@ -147,6 +152,10 @@ export class TransactionListComponent implements OnInit {
 
       return 0;
     });
+
+    this.chartData = tempChartData;
+    console.log(this.chartData);
+
     this.finishedCalculatingChart = true;
   }
 
@@ -154,17 +163,26 @@ export class TransactionListComponent implements OnInit {
     console.log(input);
     this.dataSource.filter = input.name;
     
-    this.transactions.forEach(transaction => {
-      if(transaction.budgetCategory == input.name) {
-        if (!this.shouldSkipTransaction(transaction)) {
-          console.log(transaction);
-        }
+    // this.transactions.forEach(transaction => {
+    //   if(transaction.budgetCategory == input.name) {
+    //     if (!this.shouldSkipTransaction(transaction)) {
+    //       //console.log(transaction);
+    //     }
+    //   }
+    // });
+
+    var tempChartData = [];
+    this.transactions.forEach(t => {
+      if (t.budgetCategory == input.name) {
+        tempChartData.push(t);
       }
     });
+    this.calculateChartValues(tempChartData, true);
   }
 
   clearCategoryFilter() {
     this.dataSource.filter = null;
+    this.calculateChartValues(this.transactions);
   }
 
   populateDataSource(startDate: Date, endDate: Date) {
@@ -174,7 +192,8 @@ export class TransactionListComponent implements OnInit {
       this.dataSource = new MatTableDataSource(result);
       this.dataSource.sort = this.sort;
       this.transactions = result;
-      this.calculateChartValues();
+
+      this.calculateChartValues(this.transactions);
     });
   }
 

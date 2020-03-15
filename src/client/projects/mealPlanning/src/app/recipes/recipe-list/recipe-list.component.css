@@ -2,3 +2,8 @@
   float: left;
   margin: 30px;
 } 
+
+a, a:hover {
+  color: white;
+  text-decoration: none;
+}

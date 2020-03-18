@@ -45,3 +45,4 @@ Thumbs.db
 
 # Private Files
 *.private.seed.json
+src/server/settings.mongo.json

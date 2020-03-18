@@ -1,7 +1,9 @@
 const mongoose = require('mongoose');
+const mongoSettings = require('./settings.mongo.json');
+
 mongoose.Promise = global.Promise;
 
-const mongoUri = 'mongodb://localhost:27017/FamilyToolbox-Recipes'
+const mongoUri = mongoSettings.connectionString;
 function connect() {
   mongoose.set('debug', true);
   return mongoose.connect(mongoUri, {
